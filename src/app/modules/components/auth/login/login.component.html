@@ -1,5 +1,41 @@
-<p>login works!</p>
-<input type="text" pInputText />
-<div class="card flex justify-content-center">
-  <p-button label="Check" icon="pi pi-check"></p-button>
-</div>
+<section
+  class="flex flex-column align-items-center justify-content-center h-screen"
+>
+  <img class="w-10rem pb-6" src="assets/img/instagram.png" />
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="flex flex-column align-items-center">
+      <span class="p-float-label m-4">
+        <input
+          pInputText
+          formControlName="username"
+          type="text"
+          id="username"
+        />
+        <label htmlFor="username"> Username </label>
+      </span>
+
+      <span class="p-float-label m-4">
+        <input
+          pInputText
+          formControlName="password"
+          type="password"
+          id="password"
+        />
+        <label htmlFor="password">Password</label>
+      </span>
+
+      <p-button
+        type="submit"
+        class="submit-button m-4"
+        label="Log In"
+        [raised]="true"
+        [disabled]="!formGroup.valid"
+        severity="secondary"
+      ></p-button>
+    </div>
+  </form>
+  <pre>
+    {{ formGroup.value | json }}
+    {{ formGroup.valid | json }}
+  </pre>
+</section>
