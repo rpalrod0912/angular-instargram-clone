@@ -1,8 +1,14 @@
 section {
-  padding-bottom: 10rem;
+  padding-bottom: 2rem;
 }
 
 //Change PrimeNg Styles
 ::ng-deep .p-button {
   width: 16rem;
+}
+
+@media (max-width: 500px) {
+  ::ng-deep .p-message-wrapper {
+    width: 16rem;
+  }
 }

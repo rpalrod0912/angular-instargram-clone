@@ -10,7 +10,10 @@ export class TextInputComponent implements OnInit {
   @Input() inputId!: string;
   @Input() inputType: string = 'text';
   @Input() label!: string;
-  @Input() controlName!: string;
+  @Input()
+  formGroupParent!: FormGroup;
+
+  @Input() controlName: string = '';
 
   value: string | undefined;
 

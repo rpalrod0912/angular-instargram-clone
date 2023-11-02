@@ -4,29 +4,25 @@
   <img class="w-10rem pb-6" src="assets/img/instagram.png" />
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="flex flex-column align-items-center">
-      <span class="p-float-label m-4">
-        <input
-          pInputText
-          formControlName="username"
-          type="text"
-          id="username"
-        />
-        <label htmlFor="username"> Username </label>
-      </span>
-
-      <span class="p-float-label m-4">
-        <input
-          pInputText
-          formControlName="password"
-          type="password"
-          id="password"
-        />
-        <label htmlFor="password">Password</label>
-      </span>
-
+      <app-text-input
+        class="m-3"
+        [formGroupParent]="formGroup"
+        [controlName]="'username'"
+        [inputId]="'username'"
+        [label]="'Username'"
+        [inputType]="'text'"
+      ></app-text-input>
+      <app-text-input
+        class="m-3"
+        [formGroupParent]="formGroup"
+        [controlName]="'password'"
+        [inputId]="'password'"
+        [label]="'Password'"
+        [inputType]="'text'"
+      ></app-text-input>
       <p-button
         type="submit"
-        class="submit-button m-4"
+        class="submit-button m-3"
         label="Log In"
         [raised]="true"
         [disabled]="!formGroup.valid"
@@ -34,8 +30,16 @@
       ></p-button>
     </div>
   </form>
-  <pre>
-    {{ formGroup.value | json }}
-    {{ formGroup.valid | json }}
-  </pre>
+  <p-button
+    type="submit"
+    class="submit-button m-3"
+    label="Try fetch data"
+    [raised]="true"
+    severity="secondary"
+    (click)="fetchUserData('13')"
+  ></p-button>
+  <app-pop-up-message
+    *ngIf="showErrorMessage"
+    [messages]="errorMessage"
+  ></app-pop-up-message>
 </section>
