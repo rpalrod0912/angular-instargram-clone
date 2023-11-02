@@ -38,8 +38,10 @@
     severity="secondary"
     (click)="fetchUserData('13')"
   ></p-button>
-  <app-pop-up-message
+
+  <!-- <app-pop-up-message
     *ngIf="showErrorMessage"
     [messages]="errorMessage"
-  ></app-pop-up-message>
+  ></app-pop-up-message> -->
+  <app-toast-message></app-toast-message>
 </section>

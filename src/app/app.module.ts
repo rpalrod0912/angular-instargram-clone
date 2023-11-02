@@ -8,12 +8,13 @@ import { AuthModule } from './modules/components/auth/auth.module';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from './modules/shared/shared.module';
-import { UserDashboardComponent } from './modules/components/user-dashboard/user-dashboard.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './modules/interceptors/auth.interceptor';
+import { HomeComponent } from './modules/components/dashboard/home/home.component';
+import { DashboardModule } from './modules/components/dashboard/dashboard.module';
 
 @NgModule({
-  declarations: [AppComponent, UserDashboardComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +22,7 @@ import { AuthInterceptor } from './modules/interceptors/auth.interceptor';
     SharedModule,
     BrowserAnimationsModule,
     AuthModule,
+    DashboardModule,
   ],
   providers: [
     {

@@ -17,4 +17,15 @@ export class AuthService {
       observe: 'response',
     });
   }
+
+  userRegister(userRegister: {
+    username: string;
+    password: string;
+    email: string;
+  }) {
+    return this.httpClient.post<any>(API_ENDPOINTS.AUTH.REGISTER, {
+      ...userRegister,
+      observe: 'response',
+    });
+  }
 }

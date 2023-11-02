@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent implements OnInit {
+export class TextInputComponent {
   @Input() inputId!: string;
   @Input() inputType: string = 'text';
   @Input() label!: string;
@@ -16,8 +16,4 @@ export class TextInputComponent implements OnInit {
   @Input() controlName: string = '';
 
   value: string | undefined;
-
-  ngOnInit(): void {
-    console.log(this.controlName);
-  }
 }

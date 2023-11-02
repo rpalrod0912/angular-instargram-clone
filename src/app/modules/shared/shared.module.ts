@@ -9,9 +9,15 @@ import { AuthService } from '../services/auth.service';
 import { PopUpMessageComponent } from './components/pop-up-message/pop-up-message.component';
 import { MessagesModule } from 'primeng/messages';
 import { UserService } from '../services/user.service';
+import { ToastModule } from 'primeng/toast';
+import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 
 @NgModule({
-  declarations: [TextInputComponent, PopUpMessageComponent],
+  declarations: [
+    TextInputComponent,
+    PopUpMessageComponent,
+    ToastMessageComponent,
+  ],
   imports: [
     InputTextModule,
     ReactiveFormsModule,
@@ -20,6 +26,7 @@ import { UserService } from '../services/user.service';
     CommonModule,
     MessagesModule,
     ButtonModule,
+    ToastModule,
   ],
   exports: [
     InputTextModule,
@@ -29,9 +36,11 @@ import { UserService } from '../services/user.service';
     HttpClientModule,
     MessagesModule,
     CommonModule,
+    ToastModule,
+    ToastMessageComponent,
     ReactiveFormsModule,
     ButtonModule,
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, ToastModule],
 })
 export class SharedModule {}

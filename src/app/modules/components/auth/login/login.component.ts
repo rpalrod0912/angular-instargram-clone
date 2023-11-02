@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Message } from 'primeng/api';
-import { errorMessage } from 'src/app/modules/constants/primeNg.constant';
+import { Router } from '@angular/router';
+import { Message, MessageService } from 'primeng/api';
+import {
+  errorMessage,
+  errorMessageToast,
+} from 'src/app/modules/constants/primeNg.constant';
+import { DASHBOARD_ROUTES } from 'src/app/modules/constants/routes.constants';
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
@@ -16,7 +21,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly messageService: MessageService,
+    private readonly router: Router
   ) {}
 
   errorMessage: Message[] = errorMessage;
@@ -26,31 +33,39 @@ export class LoginComponent implements OnInit {
     this.setForm();
   }
 
+  //Login User
   onSubmit() {
     const loginData = { ...this.formGroup.value };
-    const response = this.authService.userLogin(loginData).subscribe(
+    this.authService.userLogin(loginData).subscribe(
       (response) => {
         if (response.status === 200) {
           this.showErrorMessage = false;
           this.resetForm();
           localStorage.setItem('authToken', response.body.token);
+          this.router.navigate([DASHBOARD_ROUTES.HOME]);
         }
       },
       (error) => {
         if (error.status === 400) {
           this.showErrorMessage = true;
+
           this.formGroup
             .get('username')
             ?.setErrors({ serverError: 'Invalid username or password' });
           this.formGroup
             .get('password')
             ?.setErrors({ serverError: 'Invalid username or password' });
+
+          //Show message toast
+          this.messageService.add(errorMessageToast);
         } else {
           console.error('HTTP request error:', error);
         }
       }
     );
   }
+
+  //TODO: DELETE THIS
 
   fetchUserData(id: string) {
     this.userService.getUserData(id).subscribe((result) => {

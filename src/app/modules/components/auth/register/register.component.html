@@ -29,18 +29,36 @@
         [controlName]="'password'"
         [inputId]="'password'"
         [label]="'Password'"
-        [inputType]="'text'"
+        [inputType]="'password'"
+      ></app-text-input>
+      <app-text-input
+        class="m-3"
+        [formGroupParent]="formGroup"
+        [controlName]="'confirmPassword'"
+        [inputId]="'confirmPassword'"
+        [label]="'Confirm Password'"
+        [inputType]="'password'"
       ></app-text-input>
       <p-button
         type="submit"
         class="submit-button m-3"
-        label="Log In"
+        label="Register"
         [raised]="true"
         [disabled]="!formGroup.valid"
         severity="secondary"
       ></p-button>
     </div>
   </form>
+  <app-pop-up-message
+    *ngIf="userInvalidMessage.state"
+    [messages]="userInvalidMessage.messageObject"
+  ></app-pop-up-message>
+  <app-pop-up-message
+    *ngIf="emailInvalidMessage.state"
+    [messages]="emailInvalidMessage.messageObject"
+  ></app-pop-up-message>
+  <!--Empty Div with the method checkPasswordMatches To execute the method and update the ui every time user takes input-->
+  <div *ngIf="checkPasswordMatches()"></div>
   <pre>
     {{ formGroup.value | json }}
     {{ formGroup.valid | json }}
