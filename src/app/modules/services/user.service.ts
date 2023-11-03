@@ -1,11 +1,14 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { API_ENDPOINTS } from '../constants/endpoints.constants';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserService implements OnInit {
+  // loginStatus=
+
+  ngOnInit(): void {}
   constructor(private readonly httpClient: HttpClient) {}
 
   getUserData(id: string) {

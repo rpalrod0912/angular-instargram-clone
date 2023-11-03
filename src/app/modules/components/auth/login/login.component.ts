@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Message, MessageService } from 'primeng/api';
+import { TOKEN_VALIDATION_STATES } from 'src/app/modules/constants/general.constants';
 import {
   errorMessage,
   errorMessageToast,
@@ -23,13 +24,18 @@ export class LoginComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly messageService: MessageService,
-    private readonly router: Router
+    public router: Router
   ) {}
 
   errorMessage: Message[] = errorMessage;
   showErrorMessage: boolean = false;
 
   ngOnInit(): void {
+    if (
+      this.authService.checkIfTokenIsValid() === TOKEN_VALIDATION_STATES.VALID
+    ) {
+      this.router.navigate([DASHBOARD_ROUTES.HOME]);
+    }
     this.setForm();
   }
 
@@ -42,6 +48,7 @@ export class LoginComponent implements OnInit {
           this.showErrorMessage = false;
           this.resetForm();
           localStorage.setItem('authToken', response.body.token);
+          this.authService.userDataSubject.next(response.body);
           this.router.navigate([DASHBOARD_ROUTES.HOME]);
         }
       },
@@ -66,12 +73,6 @@ export class LoginComponent implements OnInit {
   }
 
   //TODO: DELETE THIS
-
-  fetchUserData(id: string) {
-    this.userService.getUserData(id).subscribe((result) => {
-      console.log(result);
-    });
-  }
 
   private resetForm() {
     this.formGroup.get('username')?.setValue('');

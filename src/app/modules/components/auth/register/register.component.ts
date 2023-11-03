@@ -1,5 +1,5 @@
 import { IfStmt, ThisReceiver } from '@angular/compiler';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -8,7 +8,9 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Message, MessageService } from 'primeng/api';
+import { TOKEN_VALIDATION_STATES } from 'src/app/modules/constants/general.constants';
 import { AUTH_ERRORS } from 'src/app/modules/constants/httpErrors.constants';
 import {
   emailTakenErrorMessage,
@@ -17,6 +19,7 @@ import {
   userTakenErrorMessage,
   userTakenErrorToast,
 } from 'src/app/modules/constants/primeNg.constant';
+import { DASHBOARD_ROUTES } from 'src/app/modules/constants/routes.constants';
 import { AuthService } from 'src/app/modules/services/auth.service';
 
 @Component({
@@ -24,12 +27,13 @@ import { AuthService } from 'src/app/modules/services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   formGroup!: FormGroup;
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly router: Router
   ) {}
 
   emailInvalidMessage = {
@@ -43,6 +47,11 @@ export class RegisterComponent {
   };
 
   ngOnInit(): void {
+    if (
+      this.authService.checkIfTokenIsValid() === TOKEN_VALIDATION_STATES.VALID
+    ) {
+      this.router.navigate([DASHBOARD_ROUTES.HOME]);
+    }
     this.setForm();
   }
 
@@ -62,6 +71,8 @@ export class RegisterComponent {
           // this.showErrorMessage = false;
           this.resetForm();
           localStorage.setItem('authToken', response.body.token);
+          this.authService.userDataSubject.next(response.body);
+          this.router.navigate([DASHBOARD_ROUTES.HOME]);
         }
       },
       (error) => {
@@ -124,7 +135,6 @@ export class RegisterComponent {
 
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.value;
-    console.log(control);
     // Define regular expressions for uppercase letter and number checks
     const uppercaseRegex = /[A-Z]/;
     const numberRegex = /[0-9]/;

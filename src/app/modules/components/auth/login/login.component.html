@@ -28,20 +28,14 @@
         [disabled]="!formGroup.valid"
         severity="secondary"
       ></p-button>
+      <a
+        class="text-gray-500 no-underline text-align-center hover:underline text-center m-5"
+        (click)="this.router.navigate(['/auth/register'])"
+      >
+        Don't Have An Account? Register Here!
+      </a>
     </div>
   </form>
-  <p-button
-    type="submit"
-    class="submit-button m-3"
-    label="Try fetch data"
-    [raised]="true"
-    severity="secondary"
-    (click)="fetchUserData('13')"
-  ></p-button>
 
-  <!-- <app-pop-up-message
-    *ngIf="showErrorMessage"
-    [messages]="errorMessage"
-  ></app-pop-up-message> -->
   <app-toast-message></app-toast-message>
 </section>
