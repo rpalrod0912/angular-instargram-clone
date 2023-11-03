@@ -11,6 +11,7 @@ import { MessagesModule } from 'primeng/messages';
 import { UserService } from '../services/user.service';
 import { ToastModule } from 'primeng/toast';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+import { PrimeIcons } from 'primeng/api';
 
 @NgModule({
   declarations: [

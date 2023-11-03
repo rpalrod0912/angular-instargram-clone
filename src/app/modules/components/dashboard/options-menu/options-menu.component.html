@@ -1,0 +1,7 @@
+<div>
+  <img class="w-8rem pb-4" src="assets/img/Instagram_title.png" />
+  <div class="menu-item" *ngFor="let item of menuOptions">
+    <i [class]="item.icon + ' option-icon'"></i>
+    <span class="option-font text-900">{{ item.text }}</span>
+  </div>
+</div>
