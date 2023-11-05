@@ -9,13 +9,18 @@ import { jwtDecode } from 'jwt-decode';
 import { TOKEN_VALIDATION_STATES } from '../constants/general.constants';
 import { UserInterface } from '../interfaces/user.interface';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { AUTH_ROUTES } from '../constants/routes.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit {
   ngOnInit(): void {}
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly router: Router
+  ) {
     this.userDataSubject.subscribe((result) => {
       if (
         this.checkIfTokenIsValid() === TOKEN_VALIDATION_STATES.VALID &&
@@ -49,6 +54,32 @@ export class AuthService implements OnInit {
   mockExpiredJwt = jwtDecode(
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE2OTg5NjIyNjAsImV4cCI6MTY5ODk2NTg2MH0.F4G7yBlKKGTAVxGJZqw1qQRKW4fZ4m68qXwovSBybJI'
   );
+
+  getUpdatedUserData(userId: string) {
+    const isUserAuthValid = this.checkIfTokenIsValid();
+    if (isUserAuthValid === TOKEN_VALIDATION_STATES.VALID) {
+      const newUrl = API_ENDPOINTS.USER.GET_USER_DATA.replace(':id', userId);
+      this.httpClient
+        .get<any>(newUrl, {
+          observe: 'response',
+        })
+        .subscribe(
+          (result) => {
+            if (result.status === 200) {
+              this.userDataSubject.next(result.body[0]);
+            }
+          },
+          (error) => {
+            if (error.status === 400) {
+            } else {
+              console.error('HTTP request error:', error);
+            }
+          }
+        );
+    } else {
+      this.router.navigate([AUTH_ROUTES.LOGIN]);
+    }
+  }
 
   userLogin(userData: { username: string; password: string }): Observable<any> {
     return this.httpClient.get<UserInterface>(API_ENDPOINTS.AUTH.LOGIN, {

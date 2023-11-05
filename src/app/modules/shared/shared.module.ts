@@ -11,6 +11,7 @@ import { MessagesModule } from 'primeng/messages';
 import { UserService } from '../services/user.service';
 import { ToastModule } from 'primeng/toast';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+import { FileUploadModule } from 'primeng/fileupload';
 import { PrimeIcons } from 'primeng/api';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { PrimeIcons } from 'primeng/api';
     InputTextModule,
     ReactiveFormsModule,
     FormsModule,
+    FileUploadModule,
     HttpClientModule,
     CommonModule,
     MessagesModule,
@@ -33,6 +35,7 @@ import { PrimeIcons } from 'primeng/api';
     InputTextModule,
     TextInputComponent,
     PopUpMessageComponent,
+    FileUploadModule,
     FormsModule,
     HttpClientModule,
     MessagesModule,

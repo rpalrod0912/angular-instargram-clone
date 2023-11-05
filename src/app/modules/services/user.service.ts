@@ -17,4 +17,20 @@ export class UserService implements OnInit {
       observe: 'response',
     });
   }
+
+  uploadUserProfileImage(formData: any) {
+    return this.httpClient.post<any>(
+      API_ENDPOINTS.UPLOAD_FILE.UPLOAD_USER_IMAGE,
+      formData
+    );
+  }
+
+  getUserProfileImage(userId: string) {
+    const newUrl = API_ENDPOINTS.UPLOAD_FILE.GET_USER_IMAGE.replace(
+      ':id',
+      userId
+    );
+    // return this.httpClient.get<any>(newUrl);
+    return newUrl;
+  }
 }

@@ -5,10 +5,11 @@ import { SharedModule } from '../../shared/shared.module';
 import { MessageService } from 'primeng/api';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { OptionsMenuComponent } from './options-menu/options-menu.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [HomeComponent, OptionsMenuComponent],
-  exports: [HomeComponent, OptionsMenuComponent],
+  declarations: [HomeComponent, OptionsMenuComponent, UserProfileComponent],
+  exports: [HomeComponent, OptionsMenuComponent, UserProfileComponent],
   imports: [SharedModule, DashboardRoutingModule, CommonModule],
   providers: [MessageService],
 })

@@ -9,4 +9,8 @@ export const API_ENDPOINTS = {
     GET_USER_DATA: `${API_URL}/users/:id`,
     GET_USERS: `${API_URL}/users`,
   },
+  UPLOAD_FILE: {
+    UPLOAD_USER_IMAGE: `${API_URL}/images/userProfile`,
+    GET_USER_IMAGE: `${API_URL}/images/userProfile/:id`,
+  },
 };
