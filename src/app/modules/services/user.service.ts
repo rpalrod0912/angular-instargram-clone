@@ -1,4 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { API_ENDPOINTS } from '../constants/endpoints.constants';
 
@@ -30,7 +34,10 @@ export class UserService implements OnInit {
       ':id',
       userId
     );
-    // return this.httpClient.get<any>(newUrl);
-    return newUrl;
+    const httpHeaders = new HttpHeaders().set('Accept', 'image/webp,*/*');
+    return this.httpClient.get<Blob>(newUrl, {
+      headers: httpHeaders,
+      responseType: 'blob' as 'json',
+    });
   }
 }

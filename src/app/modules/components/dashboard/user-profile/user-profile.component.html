@@ -1,10 +1,9 @@
-<form (ngSubmit)="onSubmit()" #myForm="ngForm">
-  <input
-    type="file"
-    (change)="onFileSelected($event)"
-    name="fileInput"
-    #fileInput
-    ngModel
-  />
-  <button type="submit">Upload</button>
-</form>
+<section class="dashboard-container">
+  <app-options-menu [userId]="userData.id"></app-options-menu>
+  <p-avatar
+    [image]="image"
+    styleClass="mr-2"
+    size="xlarge"
+    shape="circle"
+  ></p-avatar>
+</section>

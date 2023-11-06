@@ -1,7 +1,10 @@
 <section class="dashboard-container">
-  <app-options-menu></app-options-menu>
+  <app-options-menu [userId]="userData.id"></app-options-menu>
   <!-- <div class="main-content"></div> -->
-  <app-user-profile class="main-content"></app-user-profile>
-  <img [src]="imagePath" />
-  <app-options-menu></app-options-menu>
+  <!-- <p *ngIf="imagePath === ''; else imageLoaded">LOADING</p> -->
+  <img [src]="image" />
+  <!-- <ng-template #imageLoaded>
+    <img [src]="imagePath" />
+  </ng-template> -->
+  <app-options-menu [userId]="userData.id"></app-options-menu>
 </section>

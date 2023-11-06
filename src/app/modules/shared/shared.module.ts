@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 import { ToastModule } from 'primeng/toast';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { AvatarModule } from 'primeng/avatar';
 import { PrimeIcons } from 'primeng/api';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PrimeIcons } from 'primeng/api';
     MessagesModule,
     ButtonModule,
     ToastModule,
+    AvatarModule,
   ],
   exports: [
     InputTextModule,
@@ -44,6 +46,7 @@ import { PrimeIcons } from 'primeng/api';
     ToastMessageComponent,
     ReactiveFormsModule,
     ButtonModule,
+    AvatarModule,
   ],
   providers: [AuthService, UserService, ToastModule],
 })
