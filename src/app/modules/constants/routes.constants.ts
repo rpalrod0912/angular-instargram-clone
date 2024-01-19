@@ -4,6 +4,6 @@ export const AUTH_ROUTES = {
 };
 
 export const DASHBOARD_ROUTES = {
-  HOME: '/dashboard/home',
+  HOME: '/dashboard',
   USER: '/dashboard/user',
 };

@@ -1,24 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '../../guards/auth.guard';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from '../user-profile/components/user-profile/user-profile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HomeComponent } from '../home/components/home.component';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
+    component: DashboardComponent,
     children: [
-      {
-        path: 'home',
-        canActivate: [AuthGuard],
-        component: HomeComponent,
-      },
       {
         path: 'user/:id',
         canActivate: [AuthGuard],
-        component: UserProfileComponent,
+        loadChildren: () =>
+          import('../user-profile/user-profile.module').then(
+            (m) => m.UserProfileModule
+          ),
       },
-      { path: '**', redirectTo: 'home' },
+      {
+        path: 'home',
+        component: HomeComponent,
+        loadChildren: () =>
+          import('../home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full',
+      },
     ],
   },
 ];

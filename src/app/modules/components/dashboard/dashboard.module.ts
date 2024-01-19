@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MessageService } from 'primeng/api';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { OptionsMenuComponent } from './options-menu/options-menu.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserConfigurationComponent } from './user-configuration/user-configuration.component';
+import { UserProfileModule } from '../user-profile/user-profile.module';
+import { HomeModule } from '../home/home.module';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    OptionsMenuComponent,
-    UserProfileComponent,
-    UserConfigurationComponent,
+  declarations: [DashboardComponent],
+  exports: [DashboardComponent],
+  imports: [
+    SharedModule,
+    DashboardRoutingModule,
+    CommonModule,
+    UserProfileModule,
+    HomeModule,
   ],
-  exports: [
-    HomeComponent,
-    OptionsMenuComponent,
-    UserProfileComponent,
-    UserConfigurationComponent,
-  ],
-  imports: [SharedModule, DashboardRoutingModule, CommonModule],
   providers: [MessageService],
 })
 export class DashboardModule {}

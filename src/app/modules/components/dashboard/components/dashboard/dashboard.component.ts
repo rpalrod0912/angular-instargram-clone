@@ -7,11 +7,11 @@ import { AuthService } from 'src/app/modules/services/auth.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,

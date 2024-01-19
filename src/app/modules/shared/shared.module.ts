@@ -14,12 +14,14 @@ import { ToastMessageComponent } from './components/toast-message/toast-message.
 import { FileUploadModule } from 'primeng/fileupload';
 import { AvatarModule } from 'primeng/avatar';
 import { PrimeIcons } from 'primeng/api';
+import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 
 @NgModule({
   declarations: [
     TextInputComponent,
     PopUpMessageComponent,
     ToastMessageComponent,
+    OptionsMenuComponent,
   ],
   imports: [
     InputTextModule,
@@ -44,6 +46,7 @@ import { PrimeIcons } from 'primeng/api';
     CommonModule,
     ToastModule,
     ToastMessageComponent,
+    OptionsMenuComponent,
     ReactiveFormsModule,
     ButtonModule,
     AvatarModule,
