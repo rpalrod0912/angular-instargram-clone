@@ -4,16 +4,15 @@ import { AuthGuard } from '../../guards/auth.guard';
 import { UserProfileComponent } from '../user-profile/components/user-profile/user-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from '../home/components/home.component';
+import { UserConfigurationComponent } from '../user-profile/components/user-configuration/user-configuration.component';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     component: DashboardComponent,
     children: [
       {
-        path: 'user/:id',
-        canActivate: [AuthGuard],
+        path: 'user',
         loadChildren: () =>
           import('../user-profile/user-profile.module').then(
             (m) => m.UserProfileModule
@@ -21,14 +20,13 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent,
         loadChildren: () =>
           import('../home/home.module').then((m) => m.HomeModule),
       },
       {
-        path: '',
-        redirectTo: '/dashboard',
+        path: '**',
         pathMatch: 'full',
+        redirectTo: '/dashboard/home',
       },
     ],
   },

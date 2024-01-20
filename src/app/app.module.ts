@@ -20,8 +20,6 @@ import { DashboardModule } from './modules/components/dashboard/dashboard.module
     FormsModule,
     SharedModule,
     BrowserAnimationsModule,
-    AuthModule,
-    DashboardModule,
   ],
   providers: [
     {

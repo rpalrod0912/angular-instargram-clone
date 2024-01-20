@@ -10,13 +10,7 @@ import { HomeModule } from '../home/home.module';
 @NgModule({
   declarations: [DashboardComponent],
   exports: [DashboardComponent],
-  imports: [
-    SharedModule,
-    DashboardRoutingModule,
-    CommonModule,
-    UserProfileModule,
-    HomeModule,
-  ],
+  imports: [SharedModule, DashboardRoutingModule, CommonModule],
   providers: [MessageService],
 })
 export class DashboardModule {}
