@@ -2,7 +2,12 @@
   display: flex;
   margin: 1rem;
   flex-direction: row;
-  .main-content {
-    width: 80%;
+
+  .menu {
+    width: 15rem;
+    margin-right: 5rem;
+  }
+  .router-content {
+    width: 100% !important;
   }
 }

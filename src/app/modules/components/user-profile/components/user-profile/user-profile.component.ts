@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PostInterface } from 'src/app/modules/interfaces/post.interface';
 import { UserInterface } from 'src/app/modules/interfaces/user.interface';
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { UserService } from 'src/app/modules/services/user.service';
@@ -28,6 +29,80 @@ export class UserProfileComponent {
   ) {}
 
   userData!: UserInterface;
+  userPosts: PostInterface[] = [
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+    {
+      id: 2,
+      user_id: 3,
+      image: null,
+      content: '',
+      created_at: '',
+      updated_at: '',
+    },
+  ];
   image!: any;
 
   ngOnInit() {
@@ -49,13 +124,17 @@ export class UserProfileComponent {
     this.authService.userDataSubject.subscribe((result) => {
       if (result) {
         this.userData = result;
-        this.userService
-          .getUserProfileImage(this.authService.finalUserData.id.toString())
-          .subscribe((result) => {
-            //Get New Image With Blob Endpoint
-            let objectURL = URL.createObjectURL(result);
-            this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          });
+        if (this.userData.image) {
+          this.userService
+            .getUserProfileImage(this.authService.finalUserData.id.toString())
+            .subscribe((result) => {
+              //Get New Image With Blob Endpoint
+              let objectURL = URL.createObjectURL(result);
+              this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            });
+        } else {
+          this.image = 'assets/img/user.png';
+        }
       }
     });
   }

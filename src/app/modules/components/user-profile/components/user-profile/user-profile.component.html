@@ -1,9 +1,25 @@
-<section class="dashboard-container">
-  <!-- <p-avatar
-    [image]="image"
-    styleClass="mr-2"
-    size="xlarge"
-    shape="circle"
-  ></p-avatar> -->
+<section class="main-container">
+  <section class="top-container">
+    <p-avatar
+      [image]="image"
+      styleClass="mr-2"
+      size="xlarge"
+      shape="circle"
+    ></p-avatar>
+    <div class="profile-options">
+      <span class="user-name"> {{ this.userData.username }}</span>
+      <p-button label="Edit Profile"></p-button>
+      <!-- TODO: In future add History -->
+      <!-- <p-button label="Edit Profile"></p-button> -->
+      <p-button icon="pi pi-cog"></p-button>
+    </div>
+  </section>
+  <section class="user-posts">
+    <div class="posts-container">
+      <app-user-post
+        *ngFor="let post of userPosts"
+        [postData]="post"
+      ></app-user-post>
+    </div>
+  </section>
 </section>
-<p>1</p>

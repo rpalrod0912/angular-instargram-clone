@@ -15,6 +15,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { AvatarModule } from 'primeng/avatar';
 import { PrimeIcons } from 'primeng/api';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
+import { UserPostComponent } from './components/user-post/user-post.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
     PopUpMessageComponent,
     ToastMessageComponent,
     OptionsMenuComponent,
+    UserPostComponent,
   ],
   imports: [
     InputTextModule,
@@ -41,6 +43,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
     PopUpMessageComponent,
     FileUploadModule,
     FormsModule,
+    UserPostComponent,
     HttpClientModule,
     MessagesModule,
     CommonModule,

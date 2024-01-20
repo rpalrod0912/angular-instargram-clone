@@ -1,11 +1,13 @@
 <section class="dashboard-container">
-  <app-options-menu [userId]="userData.id"></app-options-menu>
+  <app-options-menu class="menu" [userId]="userData.id"></app-options-menu>
   <!-- <div class="main-content"></div> -->
   <!-- <p *ngIf="imagePath === ''; else imageLoaded">LOADING</p> -->
-  <img [src]="image" />
-  <router-outlet></router-outlet>
+  <!-- <img [src]="image" /> -->
+  <div class="router-content">
+    <router-outlet></router-outlet>
+  </div>
+
   <!-- <ng-template #imageLoaded>
     <img [src]="imagePath" />
   </ng-template> -->
-  <app-options-menu [userId]="userData.id"></app-options-menu>
 </section>
