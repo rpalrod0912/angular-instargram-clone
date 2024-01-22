@@ -1,1 +1,14 @@
-<div class="mock-post"></div>
+<div class="post-container">
+  <img (click)="showFullscreenDiv()" [src]="postData.imageDecoded" />
+</div>
+
+<div class="fullscreen-div" [@fadeInOut]="showDiv">
+  <button
+    (click)="this.showDiv = false"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-times"
+    class="p-button-rounded p-button-secondary close-button"
+  ></button>
+</div>

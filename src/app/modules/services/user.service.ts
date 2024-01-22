@@ -22,6 +22,15 @@ export class UserService implements OnInit {
     });
   }
 
+  getUserFollowers(userId: number) {
+    const url = API_ENDPOINTS.FOLLOWERS.GET_USER_FOLLOWERS;
+    return this.httpClient.get<any>(url, {
+      params: {
+        user: userId,
+      },
+    });
+  }
+
   uploadUserProfileImage(formData: any) {
     return this.httpClient.post<any>(
       API_ENDPOINTS.UPLOAD_FILE.UPLOAD_USER_IMAGE,
@@ -40,4 +49,14 @@ export class UserService implements OnInit {
       responseType: 'blob' as 'json',
     });
   }
+
+  //New Endpoint to get image data with also user Data
+  // getUserProfileImage(userId: string) {
+  //   const newUrl = API_ENDPOINTS.UPLOAD_FILE.GET_USER_IMAGE.replace(
+  //     ':id',
+  //     userId
+  //   );
+  //   const httpHeaders = new HttpHeaders().set('Accept', 'image/webp,*/*');
+  //   return this.httpClient.get<any>(newUrl);
+  // }
 }

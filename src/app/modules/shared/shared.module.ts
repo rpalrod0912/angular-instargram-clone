@@ -12,8 +12,11 @@ import { UserService } from '../services/user.service';
 import { ToastModule } from 'primeng/toast';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DialogModule } from 'primeng/dialog';
 import { AvatarModule } from 'primeng/avatar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PrimeIcons } from 'primeng/api';
+import { ImageModule } from 'primeng/image';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { UserPostComponent } from './components/user-post/user-post.component';
 
@@ -31,7 +34,10 @@ import { UserPostComponent } from './components/user-post/user-post.component';
     FormsModule,
     FileUploadModule,
     HttpClientModule,
+    ProgressSpinnerModule,
     CommonModule,
+    DialogModule,
+    ImageModule,
     MessagesModule,
     ButtonModule,
     ToastModule,
@@ -40,10 +46,13 @@ import { UserPostComponent } from './components/user-post/user-post.component';
   exports: [
     InputTextModule,
     TextInputComponent,
+    ProgressSpinnerModule,
     PopUpMessageComponent,
     FileUploadModule,
     FormsModule,
+    ImageModule,
     UserPostComponent,
+    DialogModule,
     HttpClientModule,
     MessagesModule,
     CommonModule,

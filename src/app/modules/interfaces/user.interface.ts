@@ -8,3 +8,8 @@ export interface UserInterface {
   updated_at: string;
   username: string;
 }
+
+export interface UserFollowersInterface {
+  followers: number;
+  followeds: number;
+}

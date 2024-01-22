@@ -51,6 +51,7 @@ export class AuthService implements OnInit {
 
   finalUserData!: UserInterface;
 
+  //TODO: Delete this
   mockExpiredJwt = jwtDecode(
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE2OTg5NjIyNjAsImV4cCI6MTY5ODk2NTg2MH0.F4G7yBlKKGTAVxGJZqw1qQRKW4fZ4m68qXwovSBybJI'
   );

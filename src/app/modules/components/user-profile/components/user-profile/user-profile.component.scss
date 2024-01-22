@@ -10,8 +10,23 @@
   }
   .top-container {
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .user-basic-data {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .user-followers {
+    display: flex;
+    justify-content: center;
+    margin-left: 17rem;
+    span {
+      font-size: 1.2rem;
+      margin: 1rem;
+    }
   }
   .profile-options {
     margin-left: 4rem;

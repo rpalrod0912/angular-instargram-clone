@@ -30,7 +30,6 @@ export class OptionsMenuComponent {
 
   goToRoute(routerLink: string, text: string) {
     if (text === 'Profile') {
-      debugger;
       this.router.navigate([routerLink, this.userId]);
     }
   }

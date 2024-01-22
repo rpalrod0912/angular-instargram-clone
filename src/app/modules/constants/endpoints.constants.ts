@@ -13,4 +13,10 @@ export const API_ENDPOINTS = {
     UPLOAD_USER_IMAGE: `${API_URL}/images/userProfile`,
     GET_USER_IMAGE: `${API_URL}/images/userProfile/:id`,
   },
+  FOLLOWERS: {
+    GET_USER_FOLLOWERS: `${API_URL}/followers`,
+  },
+  POSTS: {
+    GET_USER_POSTS: `${API_URL}/posts/user/:id`,
+  },
 };
