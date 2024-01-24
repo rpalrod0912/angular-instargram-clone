@@ -5,12 +5,9 @@
   <ng-template #profileContent>
     <section class="top-container">
       <div class="user-basic-data">
-        <p-avatar
-          [image]="image"
-          styleClass="mr-2"
-          size="xlarge"
-          shape="circle"
-        ></p-avatar>
+        <app-user-profile-image
+          [userImage]="this.userData.imageDecoded ?? 'assets/img/user.png'"
+        ></app-user-profile-image>
         <div class="profile-options">
           <span class="user-name"> {{ this.userData.username }}</span>
           <p-button label="Edit Profile"></p-button>

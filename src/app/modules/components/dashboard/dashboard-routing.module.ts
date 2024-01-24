@@ -24,6 +24,11 @@ const routes: Routes = [
           import('../home/home.module').then((m) => m.HomeModule),
       },
       {
+        path: 'new-post',
+        loadChildren: () =>
+          import('../new-post/new-post.module').then((m) => m.NewPostModule),
+      },
+      {
         path: '**',
         pathMatch: 'full',
         redirectTo: '/dashboard/home',

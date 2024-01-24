@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { API_ENDPOINTS } from 'src/app/modules/constants/endpoints.constants';
 import { UserInterface } from 'src/app/modules/interfaces/user.interface';
 import { AuthService } from 'src/app/modules/services/auth.service';
+import { GeneralService } from 'src/app/modules/services/general.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
+    private readonly generalService: GeneralService,
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
     private http: HttpClient
@@ -27,21 +29,7 @@ export class DashboardComponent implements OnInit {
     this.authService.getUpdatedUserData(
       this.authService.finalUserData.id.toString()
     );
-    this.setListeners();
-  }
 
-  private setListeners() {
-    this.authService.userDataSubject.subscribe((result) => {
-      if (result) {
-        this.userData = result;
-        this.userService
-          .getUserProfileImage(this.authService.finalUserData.id.toString())
-          .subscribe((result) => {
-            //Get New Image With Blob Endpoint
-            let objectURL = URL.createObjectURL(result);
-            this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          });
-      }
-    });
+    this.userData = this.userService.userData;
   }
 }

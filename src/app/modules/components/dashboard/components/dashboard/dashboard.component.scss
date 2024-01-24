@@ -1,13 +1,13 @@
 .dashboard-container {
   display: flex;
-  margin: 1rem;
+  width: 100% !important;
   flex-direction: row;
 
   .menu {
     width: 15rem;
-    margin-right: 5rem;
   }
   .router-content {
     width: 100% !important;
+    min-height: 100vh !important;
   }
 }

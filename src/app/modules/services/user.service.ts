@@ -5,12 +5,15 @@ import {
 } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { API_ENDPOINTS } from '../constants/endpoints.constants';
+import { UserInterface } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService implements OnInit {
   // loginStatus=
+
+  userData!: UserInterface;
 
   ngOnInit(): void {}
   constructor(private readonly httpClient: HttpClient) {}
@@ -38,25 +41,24 @@ export class UserService implements OnInit {
     );
   }
 
-  getUserProfileImage(userId: string) {
-    const newUrl = API_ENDPOINTS.UPLOAD_FILE.GET_USER_IMAGE.replace(
-      ':id',
-      userId
-    );
-    const httpHeaders = new HttpHeaders().set('Accept', 'image/webp,*/*');
-    return this.httpClient.get<Blob>(newUrl, {
-      headers: httpHeaders,
-      responseType: 'blob' as 'json',
-    });
-  }
-
-  //New Endpoint to get image data with also user Data
   // getUserProfileImage(userId: string) {
   //   const newUrl = API_ENDPOINTS.UPLOAD_FILE.GET_USER_IMAGE.replace(
   //     ':id',
   //     userId
   //   );
   //   const httpHeaders = new HttpHeaders().set('Accept', 'image/webp,*/*');
-  //   return this.httpClient.get<any>(newUrl);
+  //   return this.httpClient.get<Blob>(newUrl, {
+  //     headers: httpHeaders,
+  //     responseType: 'blob' as 'json',
+  //   });
   // }
+
+  //New Endpoint to get image data with also user Data
+  getUserProfileImage(userId: string) {
+    const newUrl = API_ENDPOINTS.UPLOAD_FILE.GET_USER_IMAGE.replace(
+      ':id',
+      userId
+    );
+    return this.httpClient.get<any>(newUrl);
+  }
 }

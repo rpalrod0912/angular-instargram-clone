@@ -18,5 +18,6 @@ export const API_ENDPOINTS = {
   },
   POSTS: {
     GET_USER_POSTS: `${API_URL}/posts/user/:id`,
+    UPLOAD_NEW_POST: `${API_URL}/posts`,
   },
 };

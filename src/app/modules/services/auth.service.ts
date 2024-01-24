@@ -11,6 +11,8 @@ import { UserInterface } from '../interfaces/user.interface';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_ROUTES } from '../constants/routes.constants';
+import { UserService } from './user.service';
+import { GeneralService } from './general.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,19 +21,23 @@ export class AuthService implements OnInit {
   ngOnInit(): void {}
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly userService: UserService,
+    private readonly generalService: GeneralService
   ) {
-    this.userDataSubject.subscribe((result) => {
+    this.userDataSubject.subscribe((result: UserInterface) => {
       if (
         this.checkIfTokenIsValid() === TOKEN_VALIDATION_STATES.VALID &&
         result === this.initialUserData
       ) {
         const token = localStorage.getItem('authToken');
-        const decoded = token ? jwtDecode(token) : '';
+        const decoded: any = token ? jwtDecode(token) : '';
         this.userDataSubject.next(decoded as UserInterface);
       }
       if (result !== this.initialUserData) {
         this.finalUserData = result;
+
+        this.userService.userData = this.finalUserData;
       }
     });
   }
@@ -67,6 +73,12 @@ export class AuthService implements OnInit {
         .subscribe(
           (result) => {
             if (result.status === 200) {
+              const userDataRespone: UserInterface = result.body[0];
+              //Decode Image, Ready to use image in Html
+              userDataRespone.imageDecoded =
+                this.generalService.decodeBase64Image(
+                  userDataRespone.image ?? ''
+                );
               this.userDataSubject.next(result.body[0]);
             }
           },

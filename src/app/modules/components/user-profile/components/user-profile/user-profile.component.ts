@@ -41,86 +41,9 @@ export class UserProfileComponent {
   userFollowers!: UserFollowersInterface;
   UserPosts!: PostInterface[];
   userPosts!: PostInterface[];
-  // [
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  //   {
-  //     id: 2,
-  //     user_id: 3,
-  //     image: null,
-  //     content: '',
-  //     created_at: '',
-  //     updated_at: '',
-  //   },
-  // ];
   image!: any;
 
   ngOnInit() {
-    this.authService.getUpdatedUserData(
-      this.authService.finalUserData.id.toString()
-    );
     this.setListeners();
   }
 
@@ -133,46 +56,34 @@ export class UserProfileComponent {
   }
 
   private setListeners() {
+    //Find Last User Data
+    this.authService.getUpdatedUserData(
+      this.authService.finalUserData.id.toString()
+    );
+
     this.authService.userDataSubject.subscribe((result) => {
       if (result) {
-        console.log(result);
         this.userData = result;
+      }
+    });
 
-        //GET USER FOLLOWERS FOR DISPLAYING IN PROFILE
-        this.userService
-          .getUserFollowers(this.userData.id)
-          .subscribe((result) => {
-            if (result) {
-              this.userFollowers = result;
-            }
-            // this.userFollowers=result;
-          });
+    //GET USER FOLLOWERS FOR DISPLAYING IN PROFILE
 
-        //GET USER POSTS FOR DISPLAYING IN PROFILE
-        this.postService.getUserPosts(this.userData.id).subscribe((result) => {
-          if (result) {
-            console.log(result);
-            result.forEach((post: PostInterface, index: number) => {
-              post.imageDecoded = this.generalService.decodeBase64Image(
-                post.image
-              );
-            });
-            this.userPosts = result;
-            console.log(this.userPosts);
-          }
+    this.userService.getUserFollowers(this.userData.id).subscribe((result) => {
+      if (result) {
+        this.userFollowers = result;
+      }
+      // this.userFollowers=result;
+    });
+
+    //GET USER POSTS FOR DISPLAYING IN PROFILE
+
+    this.postService.getUserPosts(this.userData.id).subscribe((result) => {
+      if (result) {
+        result.forEach((post: PostInterface, index: number) => {
+          post.imageDecoded = this.generalService.decodeBase64Image(post.image);
         });
-
-        if (this.userData.image) {
-          this.image = this.sanitizer.bypassSecurityTrustResourceUrl(
-            'data:image/jpg;base64,' + this.userData.image
-          );
-          //Get New Image With Blob Endpoint
-          // let objectURL = URL.createObjectURL(result);
-          // this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          //Other way to obtain image+ user data
-        } else {
-          this.image = 'assets/img/user.png';
-        }
+        this.userPosts = result;
       }
     });
   }

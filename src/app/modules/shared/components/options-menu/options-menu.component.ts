@@ -13,6 +13,11 @@ export const optionsConstants = [
     icon: 'pi pi-user',
     routerLink: DASHBOARD_ROUTES.USER,
   },
+  {
+    text: 'New Post',
+    icon: 'pi pi-plus',
+    routerLink: DASHBOARD_ROUTES.NEW_POST,
+  },
   { text: 'Liked', icon: 'pi pi-heart', routerLink: '' },
 ];
 
@@ -28,9 +33,11 @@ export class OptionsMenuComponent {
 
   menuOptions = optionsConstants;
 
-  goToRoute(routerLink: string, text: string) {
+  goToRoute(routerLink: string, text: string): void {
     if (text === 'Profile') {
       this.router.navigate([routerLink, this.userId]);
+      return;
     }
+    this.router.navigate([routerLink]);
   }
 }

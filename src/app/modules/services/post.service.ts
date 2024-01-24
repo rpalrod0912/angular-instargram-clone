@@ -20,4 +20,11 @@ export class PostService implements OnInit {
     );
     return this.httpClient.get<any>(url);
   }
+
+  createPost(formData: FormData) {
+    return this.httpClient.post<any>(
+      API_ENDPOINTS.POSTS.UPLOAD_NEW_POST,
+      formData
+    );
+  }
 }

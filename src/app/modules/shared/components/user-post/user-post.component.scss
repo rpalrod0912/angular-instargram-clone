@@ -1,3 +1,5 @@
+@import "/src//app/modules/styles/variables";
+
 .post-container {
   width: 100%;
   height: 100%;
@@ -26,6 +28,7 @@
   right: 2rem;
   top: 2rem;
 }
+
 .fullscreen-div {
   position: fixed;
   top: 0;
@@ -34,4 +37,45 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
+}
+
+::ng-deep .post-template {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  background-color: white;
+  margin: 0 auto;
+  //Styles for image covering and overflow the container because not all images have correcto proportions
+  .post-principal-image {
+    width: 62%;
+    object-fit: cover;
+    height: 100%;
+    //TODO: Add color to Variable
+    border-right: 1.7px solid $separator;
+  }
+
+  .post-data-container {
+    width: 100%;
+    .post-data-head {
+      display: flex;
+      border-bottom: 1.7px solid $separator;
+    }
+  }
+
+  .post-user-image {
+    margin: 1.5rem;
+
+    .p-avatar {
+      width: 4rem !important;
+      height: 4rem !important;
+    }
+  }
+
+  .username-span {
+    font-weight: 500;
+  }
+
+  .comment-text {
+    margin-top: 9px;
+  }
 }

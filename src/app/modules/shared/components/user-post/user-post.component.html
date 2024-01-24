@@ -11,4 +11,44 @@
     icon="pi pi-times"
     class="p-button-rounded p-button-secondary close-button"
   ></button>
+  <p-progressSpinner
+    *ngIf="!this.postOwnerImage; else postContent"
+  ></p-progressSpinner>
+  <ng-template #postContent>
+    <div class="post-template">
+      <img class="post-principal-image" [src]="postData.imageDecoded" />
+      <div class="post-data-container">
+        <div
+          class="post-data-head align-items-center"
+          *ngIf="this.postOwnerImage"
+        >
+          <app-user-profile-image
+            class="post-user-image"
+            [userImage]="this.postOwnerImage"
+          ></app-user-profile-image>
+          <div class="flex flex-column">
+            <span class="username-span">{{ postData.user_name }}</span>
+            <span>{{ postData.content }}</span>
+          </div>
+        </div>
+        <div class="post-data-body flex flex-column">
+          <div
+            class="comment flex align-items-center"
+            *ngFor="let comment of postData.comments"
+          >
+            <app-user-profile-image
+              class="post-user-image"
+              [userImage]="
+                this.generalService.decodeBase64Image(comment.user_image)
+              "
+            ></app-user-profile-image>
+            <div class="flex flex-column">
+              <span class="username-span">{{ comment.user_name }}</span>
+              <span class="comment-text">{{ comment.content }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>

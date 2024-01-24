@@ -16,9 +16,11 @@ import { DialogModule } from 'primeng/dialog';
 import { AvatarModule } from 'primeng/avatar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PrimeIcons } from 'primeng/api';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ImageModule } from 'primeng/image';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { UserPostComponent } from './components/user-post/user-post.component';
+import { UserProfileImageComponent } from './components/user-profile-image/user-profile-image.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,13 @@ import { UserPostComponent } from './components/user-post/user-post.component';
     ToastMessageComponent,
     OptionsMenuComponent,
     UserPostComponent,
+    UserProfileImageComponent,
   ],
   imports: [
     InputTextModule,
     ReactiveFormsModule,
     FormsModule,
+    InputTextareaModule,
     FileUploadModule,
     HttpClientModule,
     ProgressSpinnerModule,
@@ -49,9 +53,11 @@ import { UserPostComponent } from './components/user-post/user-post.component';
     ProgressSpinnerModule,
     PopUpMessageComponent,
     FileUploadModule,
+    InputTextareaModule,
     FormsModule,
     ImageModule,
     UserPostComponent,
+    UserProfileImageComponent,
     DialogModule,
     HttpClientModule,
     MessagesModule,

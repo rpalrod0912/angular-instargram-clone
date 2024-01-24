@@ -1,0 +1,33 @@
+<section
+  class="flex flex-column align-items-center justify-content-center h-screen"
+>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="flex flex-column align-items-center">
+      <span class="input-title">Post Content</span>
+      <textarea
+        rows="10"
+        cols="50"
+        pInputTextarea
+        formControlName="content"
+      ></textarea>
+
+      <span>Upload an Image For Your Post</span>
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        name="fileInput"
+        #fileInput
+      />
+    </div>
+  </form>
+  <p-button
+    type="submit"
+    (onClick)="onSubmit()"
+    class="submit-button m-3"
+    label="Register"
+    [raised]="true"
+    [disabled]="!formGroup.valid || !this.selectedFile"
+    severity="secondary"
+  ></p-button>
+</section>
+<pre>{{ this.formGroup.value | json }}</pre>
