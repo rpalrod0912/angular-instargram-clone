@@ -1,12 +1,21 @@
-<section class="dashboard-container">
-  <app-options-menu class="menu" [userId]="userData.id"></app-options-menu>
+<section *ngIf="this.userData" class="dashboard-container">
+  <app-options-menu
+    *ngIf="this.userData"
+    (showCreatePost)="showNewPostModal()"
+    class="menu"
+    [userId]="userData.id"
+  ></app-options-menu>
   <!-- <div class="main-content"></div> -->
   <!-- <p *ngIf="imagePath === ''; else imageLoaded">LOADING</p> -->
   <!-- <img [src]="image" /> -->
   <div class="router-content">
     <router-outlet></router-outlet>
+    <app-new-post
+      *ngIf="showNewPostDialog"
+      (closeCreatePost)="this.showNewPostDialog = false"
+      class="create-post-dialog"
+    ></app-new-post>
   </div>
-
   <!-- <ng-template #imageLoaded>
     <img [src]="imagePath" />
   </ng-template> -->

@@ -1,6 +1,11 @@
 <section class="main-container">
   <p-progressSpinner
-    *ngIf="!userPosts || !userData || !userFollowers; else profileContent"
+    *ngIf="
+      !this.loadedStates.userDataLoad ||
+        !this.loadedStates.userPostsLoad ||
+        !this.loadedStates.userFollowersLoad;
+      else profileContent
+    "
   ></p-progressSpinner>
   <ng-template #profileContent>
     <section class="top-container">

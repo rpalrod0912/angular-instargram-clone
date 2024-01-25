@@ -54,13 +54,9 @@ export class AuthService implements OnInit {
   };
 
   userDataSubject = new BehaviorSubject(this.initialUserData);
+  userDataObservable = this.userDataSubject.asObservable();
 
   finalUserData!: UserInterface;
-
-  //TODO: Delete this
-  mockExpiredJwt = jwtDecode(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJpYXQiOjE2OTg5NjIyNjAsImV4cCI6MTY5ODk2NTg2MH0.F4G7yBlKKGTAVxGJZqw1qQRKW4fZ4m68qXwovSBybJI'
-  );
 
   getUpdatedUserData(userId: string) {
     const isUserAuthValid = this.checkIfTokenIsValid();

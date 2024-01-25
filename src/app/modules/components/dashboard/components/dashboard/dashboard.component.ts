@@ -23,13 +23,21 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   userData!: UserInterface;
+  showNewPostDialog: boolean = false;
   image!: any;
 
   ngOnInit() {
     this.authService.getUpdatedUserData(
       this.authService.finalUserData.id.toString()
     );
-
+    this.authService.userDataSubject.subscribe((result) => {
+      console.log('changes in dsahboard');
+    });
     this.userData = this.userService.userData;
+  }
+
+  //The Function executes when @output from app-options-menu emits new value
+  showNewPostModal() {
+    this.showNewPostDialog = !this.showNewPostDialog;
   }
 }

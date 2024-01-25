@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ROUTES, Router } from '@angular/router';
 import { DASHBOARD_ROUTES } from 'src/app/modules/constants/routes.constants';
 
@@ -28,6 +28,7 @@ export const optionsConstants = [
 })
 export class OptionsMenuComponent {
   @Input() userId!: number;
+  @Output() showCreatePost = new EventEmitter<boolean>();
 
   constructor(private router: Router) {}
 
@@ -37,7 +38,15 @@ export class OptionsMenuComponent {
     if (text === 'Profile') {
       this.router.navigate([routerLink, this.userId]);
       return;
+    } else if (text === 'New Post') {
+      this.showCreatePostDialog(true);
+      return;
     }
     this.router.navigate([routerLink]);
+  }
+
+  //Emit new value to Create Post Dialog for dasbhoard executing new value
+  showCreatePostDialog(option: boolean) {
+    this.showCreatePost.emit(option);
   }
 }

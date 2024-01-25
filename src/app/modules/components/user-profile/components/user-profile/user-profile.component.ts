@@ -31,15 +31,21 @@ export class UserProfileComponent {
     private readonly userService: UserService,
     private readonly postService: PostService,
     private readonly generalService: GeneralService,
-
-    private cdr: ChangeDetectorRef,
-    private sanitizer: DomSanitizer,
     private http: HttpClient
-  ) {}
+  ) {
+    this.authService.userDataSubject.subscribe((result) => {
+      console.log('changes in user component');
+    });
+  }
+
+  loadedStates = {
+    userDataLoad: false,
+    userFollowersLoad: false,
+    userPostsLoad: false,
+  };
 
   userData!: UserInterface;
   userFollowers!: UserFollowersInterface;
-  UserPosts!: PostInterface[];
   userPosts!: PostInterface[];
   image!: any;
 
@@ -62,28 +68,38 @@ export class UserProfileComponent {
     );
 
     this.authService.userDataSubject.subscribe((result) => {
+      this.loadedStates.userDataLoad = false;
+
       if (result) {
         this.userData = result;
+        this.postService.getUserPosts(this.userData.id);
+        this.loadedStates.userDataLoad = true;
       }
     });
 
     //GET USER FOLLOWERS FOR DISPLAYING IN PROFILE
 
     this.userService.getUserFollowers(this.userData.id).subscribe((result) => {
+      this.loadedStates.userFollowersLoad = false;
+
       if (result) {
         this.userFollowers = result;
+        this.loadedStates.userFollowersLoad = true;
       }
       // this.userFollowers=result;
     });
 
     //GET USER POSTS FOR DISPLAYING IN PROFILE
 
-    this.postService.getUserPosts(this.userData.id).subscribe((result) => {
-      if (result) {
-        result.forEach((post: PostInterface, index: number) => {
-          post.imageDecoded = this.generalService.decodeBase64Image(post.image);
-        });
-        this.userPosts = result;
+    this.postService.userPostsSubject.subscribe((result) => {
+      this.loadedStates.userPostsLoad = false;
+      debugger;
+      result.forEach((post: PostInterface, index: number) => {
+        post.imageDecoded = this.generalService.decodeBase64Image(post.image);
+      });
+      this.userPosts = result;
+      if (this.userPosts) {
+        this.loadedStates.userPostsLoad = true;
       }
     });
   }

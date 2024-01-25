@@ -1,33 +1,93 @@
-<section
-  class="flex flex-column align-items-center justify-content-center h-screen"
->
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div class="flex flex-column align-items-center">
-      <span class="input-title">Post Content</span>
-      <textarea
-        rows="10"
-        cols="50"
-        pInputTextarea
-        formControlName="content"
-      ></textarea>
+<section class="fullscreen-div new-post-template">
+  <button
+    (click)="this.closeCreatePost.emit(false)"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-times"
+    class="p-button-rounded p-button-secondary close-button"
+  ></button>
+  <form class="new-post-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <span class="span-title">Create a New Post</span>
 
-      <span>Upload an Image For Your Post</span>
-      <input
-        type="file"
-        (change)="onFileSelected($event)"
-        name="fileInput"
-        #fileInput
-      />
+    <!-- First Post creation Step Image Upload -->
+    <div
+      *ngIf="!formSteps.firstStep && !formSteps.secondStep"
+      class="form-content flex flex-column align-items-center"
+    >
+      <i class="pi pi-image"></i>
+      <p-button (click)="openFileInput()" label="Upload From Your Computer">
+        <input
+          class="hidden"
+          type="file"
+          (change)="onFileSelected($event)"
+          name="fileInput"
+          #fileInput
+      /></p-button>
+    </div>
+
+    <!-- Second Post creation Step Image Upload -->
+    <div
+      class="form-content flex align-items-center"
+      *ngIf="formSteps.firstStep"
+    >
+      <img class="image-preview" [src]="this.selectedFilePreview" />
+      <div class="post-data-container">
+        <div class="post-data-head align-items-center" *ngIf="this.userData">
+          <app-user-profile-image
+            class="post-user-image"
+            [userImage]="
+              this.generalService.decodeBase64Image(
+                this.userData.image ? this.userData.image : ''
+              )
+            "
+          ></app-user-profile-image>
+
+          <div class="flex flex-column">
+            <span class="username-span">{{ this.userData.username }}</span>
+          </div>
+        </div>
+        <textarea
+          class="new-post-textarea"
+          placeholder="Write a description about your post..."
+          formControlName="content"
+        >
+        </textarea>
+      </div>
+    </div>
+    <!-- Next Button For First Step -->
+    <p-button
+      *ngIf="!this.formSteps.firstStep"
+      type="submit"
+      (onClick)="this.formSteps.firstStep = true"
+      class="submit-button m-3"
+      label="Next"
+      [raised]="true"
+      [disabled]="!this.selectedFile"
+      severity="primary"
+    ></p-button>
+
+    <!-- Back Button And Submit Button For Second Step -->
+    <div *ngIf="this.formSteps.firstStep" class="second-step-buttons">
+      <p-button
+        type="submit"
+        (onClick)="this.formSteps.firstStep = false"
+        class="submit-button m-3"
+        label="Back"
+        [raised]="true"
+        [disabled]="!this.selectedFile"
+        severity="danger"
+      ></p-button>
+      <p-button
+        type="submit"
+        class="submit-button m-3"
+        label="Register"
+        [raised]="true"
+        [disabled]="!formGroup.valid || !this.selectedFile"
+        severity="secondary"
+      ></p-button>
     </div>
   </form>
-  <p-button
-    type="submit"
-    (onClick)="onSubmit()"
-    class="submit-button m-3"
-    label="Register"
-    [raised]="true"
-    [disabled]="!formGroup.valid || !this.selectedFile"
-    severity="secondary"
-  ></p-button>
+  <app-toast-message></app-toast-message>
 </section>
 <pre>{{ this.formGroup.value | json }}</pre>

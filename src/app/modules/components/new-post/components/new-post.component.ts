@@ -1,10 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { UploadEvent } from 'primeng/fileupload';
+import { successMessageToast } from 'src/app/modules/constants/primeNg.constant';
 import { UserInterface } from 'src/app/modules/interfaces/user.interface';
 import { AuthService } from 'src/app/modules/services/auth.service';
+import { GeneralService } from 'src/app/modules/services/general.service';
 import { PostService } from 'src/app/modules/services/post.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
@@ -14,9 +23,22 @@ import { UserService } from 'src/app/modules/services/user.service';
   styleUrls: ['./new-post.component.scss'],
 })
 export class NewPostComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
+  @Output() closeCreatePost = new EventEmitter<boolean>();
+
   userData!: UserInterface;
   selectedFile!: File;
   formGroup!: FormGroup;
+  selectedFilePreview!: string;
+
+  formSteps: { firstStep: boolean; secondStep: boolean } = {
+    firstStep: false,
+    secondStep: false,
+  };
+
+  items: MenuItem[] | undefined;
+
+  activeIndex: number = 0;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -24,6 +46,7 @@ export class NewPostComponent implements OnInit {
     private readonly userService: UserService,
     private readonly authService: AuthService,
     private readonly messageService: MessageService,
+    readonly generalService: GeneralService,
     private readonly router: Router
   ) {}
 
@@ -44,28 +67,30 @@ export class NewPostComponent implements OnInit {
     this.setForm();
   }
 
-  onSubmit() {
-    console.log('submitting form');
-    debugger;
+  openFileInput() {
+    // Trigger a click event on the file input element
+    this.fileInput.nativeElement.click();
+  }
 
+  onSubmit() {
     if (this.selectedFile && this.formGroup.valid && this.userData) {
       const formData = this.createFormDataBody([
         this.selectedFile,
         this.userData.id.toString(),
         this.formGroup.get('content')?.value,
       ]);
-      debugger;
-      this.postService.createPost(formData).subscribe(
-        (response) => {
-          console.log('Upload success:', response);
-          this.authService.getUpdatedUserData(
-            this.authService.finalUserData.id.toString()
-          );
-        },
-        (error) => {
-          console.error('Upload error:', error);
-        }
-      );
+      this.messageService.add(successMessageToast);
+
+      // this.postService.createPost(formData).subscribe(
+      //   (response) => {
+      //     console.log('Upload success:', response);
+      //     this.postService.getUserPosts(this.userData.id);
+      //     this.messageService.add(successMessageToast);
+      //   },
+      //   (error) => {
+      //     console.error('Upload error:', error);
+      //   }
+      // );
     } else {
       // Handle the case when no file is selected or name is missing
       console.log('Please select a file and provide a name.');
@@ -90,6 +115,7 @@ export class NewPostComponent implements OnInit {
   onFileSelected(event: any) {
     console.log(event);
     this.selectedFile = event.target.files[0];
+    this.selectedFilePreview = URL.createObjectURL(this.selectedFile);
   }
 
   private setForm() {

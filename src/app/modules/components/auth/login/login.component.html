@@ -2,7 +2,7 @@
   class="flex flex-column align-items-center justify-content-center h-screen"
 >
   <img class="w-10rem pb-6" src="assets/img/instagram.png" />
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <form class="login-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="flex flex-column align-items-center">
       <app-text-input
         class="m-3"

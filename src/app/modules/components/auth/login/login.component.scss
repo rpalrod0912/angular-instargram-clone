@@ -3,8 +3,10 @@ section {
 }
 
 //Change PrimeNg Styles
-::ng-deep .p-button {
-  width: 16rem;
+::ng-deep .login-form {
+  .p-button {
+    width: 16rem;
+  }
 }
 
 @media (max-width: 500px) {

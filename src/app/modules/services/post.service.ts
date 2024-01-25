@@ -5,20 +5,29 @@ import {
 } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { API_ENDPOINTS } from '../constants/endpoints.constants';
+import { BehaviorSubject } from 'rxjs';
+import { PostInterface } from '../interfaces/post.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService implements OnInit {
+  userPostsSubject: BehaviorSubject<PostInterface[]>;
+
+  constructor(private readonly httpClient: HttpClient) {
+    this.userPostsSubject = new BehaviorSubject<PostInterface[]>([]);
+  }
+
   ngOnInit(): void {}
-  constructor(private readonly httpClient: HttpClient) {}
 
   getUserPosts(id: number) {
     const url = API_ENDPOINTS.POSTS.GET_USER_POSTS.replace(
       ':id',
       id.toString()
     );
-    return this.httpClient.get<any>(url);
+    this.httpClient.get<PostInterface[]>(url).subscribe((result) => {
+      this.userPostsSubject.next(result);
+    });
   }
 
   createPost(formData: FormData) {

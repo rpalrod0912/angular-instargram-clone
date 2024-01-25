@@ -21,6 +21,7 @@ import { ImageModule } from 'primeng/image';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { UserPostComponent } from './components/user-post/user-post.component';
 import { UserProfileImageComponent } from './components/user-profile-image/user-profile-image.component';
+import { StepsModule } from 'primeng/steps';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { UserProfileImageComponent } from './components/user-profile-image/user-
     FormsModule,
     InputTextareaModule,
     FileUploadModule,
+    StepsModule,
     HttpClientModule,
     ProgressSpinnerModule,
     CommonModule,
@@ -51,6 +53,7 @@ import { UserProfileImageComponent } from './components/user-profile-image/user-
     InputTextModule,
     TextInputComponent,
     ProgressSpinnerModule,
+    StepsModule,
     PopUpMessageComponent,
     FileUploadModule,
     InputTextareaModule,
@@ -69,6 +72,6 @@ import { UserProfileImageComponent } from './components/user-profile-image/user-
     ButtonModule,
     AvatarModule,
   ],
-  providers: [AuthService, UserService, ToastModule],
+  providers: [ToastModule],
 })
 export class SharedModule {}
