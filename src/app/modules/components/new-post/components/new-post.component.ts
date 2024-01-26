@@ -10,7 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { UploadEvent } from 'primeng/fileupload';
-import { successMessageToast } from 'src/app/modules/constants/primeNg.constant';
+import {
+  createPostSuccessToast,
+  successMessageToast,
+} from 'src/app/modules/constants/primeNg.constant';
 import { UserInterface } from 'src/app/modules/interfaces/user.interface';
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { GeneralService } from 'src/app/modules/services/general.service';
@@ -30,6 +33,9 @@ export class NewPostComponent implements OnInit {
   selectedFile!: File;
   formGroup!: FormGroup;
   selectedFilePreview!: string;
+  succesContainer = false;
+
+  isLoading = true;
 
   formSteps: { firstStep: boolean; secondStep: boolean } = {
     firstStep: false,
@@ -53,6 +59,7 @@ export class NewPostComponent implements OnInit {
   ngOnInit(): void {
     if (this.userService.userData) {
       this.userData = this.userService.userData;
+      this.isLoading = false;
     } else {
       this.authService.getUpdatedUserData(
         this.authService.finalUserData.id.toString()
@@ -61,6 +68,7 @@ export class NewPostComponent implements OnInit {
       this.authService.userDataSubject.subscribe((result) => {
         if (result) {
           this.userData = result;
+          this.isLoading = false;
         }
       });
     }
@@ -79,18 +87,18 @@ export class NewPostComponent implements OnInit {
         this.userData.id.toString(),
         this.formGroup.get('content')?.value,
       ]);
-      this.messageService.add(successMessageToast);
-
-      // this.postService.createPost(formData).subscribe(
-      //   (response) => {
-      //     console.log('Upload success:', response);
-      //     this.postService.getUserPosts(this.userData.id);
-      //     this.messageService.add(successMessageToast);
-      //   },
-      //   (error) => {
-      //     console.error('Upload error:', error);
-      //   }
-      // );
+      this.isLoading = true;
+      this.postService.createPost(formData).subscribe(
+        (response) => {
+          this.isLoading = false;
+          this.messageService.add(createPostSuccessToast);
+          this.closeCreatePost.emit(false);
+          this.postService.getUserPosts(this.userData.id);
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        }
+      );
     } else {
       // Handle the case when no file is selected or name is missing
       console.log('Please select a file and provide a name.');

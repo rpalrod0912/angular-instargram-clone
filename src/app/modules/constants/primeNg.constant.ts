@@ -66,3 +66,11 @@ export const userTakenErrorToast = {
   severity: 'error',
   detail: 'This Username Already Exists',
 };
+
+//Create Post Succes Toast
+export const createPostSuccessToast = {
+  sticky: true,
+  severity: 'success',
+  summary: 'Post Created',
+  detail: 'Your Post was created successfully',
+};
