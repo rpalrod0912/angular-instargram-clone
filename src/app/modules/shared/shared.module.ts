@@ -22,6 +22,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
 import { UserPostComponent } from './components/user-post/user-post.component';
 import { UserProfileImageComponent } from './components/user-profile-image/user-profile-image.component';
 import { StepsModule } from 'primeng/steps';
+import { FollowersDialogComponent } from './dialogs/followers-dialog/followers-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { StepsModule } from 'primeng/steps';
     ToastMessageComponent,
     OptionsMenuComponent,
     UserPostComponent,
+    FollowersDialogComponent,
     UserProfileImageComponent,
+    FollowersDialogComponent,
   ],
   imports: [
     InputTextModule,
@@ -63,6 +66,7 @@ import { StepsModule } from 'primeng/steps';
     UserProfileImageComponent,
     DialogModule,
     HttpClientModule,
+    FollowersDialogComponent,
     MessagesModule,
     CommonModule,
     ToastModule,

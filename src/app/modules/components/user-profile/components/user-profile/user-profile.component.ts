@@ -14,6 +14,7 @@ import {
   UserInterface,
 } from 'src/app/modules/interfaces/user.interface';
 import { AuthService } from 'src/app/modules/services/auth.service';
+import { DialogsService } from 'src/app/modules/services/dialogs.service';
 import { GeneralService } from 'src/app/modules/services/general.service';
 import { PostService } from 'src/app/modules/services/post.service';
 import { UserService } from 'src/app/modules/services/user.service';
@@ -31,7 +32,7 @@ export class UserProfileComponent {
     private readonly userService: UserService,
     private readonly postService: PostService,
     private readonly generalService: GeneralService,
-    private http: HttpClient
+    readonly dialogsService: DialogsService
   ) {
     this.authService.userDataSubject.subscribe((result) => {
       console.log('changes in user component');

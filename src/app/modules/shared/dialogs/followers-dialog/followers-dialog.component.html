@@ -1,0 +1,21 @@
+<div class="fullscreen-div" [@fadeInOut]="openModal">
+  <button
+    (click)="
+      this.dialogsService.closeContainer(
+        '.followers-dialog',
+        'followers-dialog-unvealed'
+      )
+    "
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-times"
+    class="p-button-rounded p-button-secondary close-button"
+  ></button>
+</div>
+<div class="followers-dialog d-flex">
+  <div class="child-div">
+    <div class="child-div-head"></div>
+    <div class="child-div-body"></div>
+  </div>
+</div>

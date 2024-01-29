@@ -23,8 +23,19 @@
       </div>
       <div class="user-followers">
         <span>{{ this.userPosts.length }} posts</span>
-        <span>{{ this.userFollowers.followers }} followers</span>
-        <span>{{ this.userFollowers.followeds }} followeds</span>
+        <span
+          class="user-followers-option"
+          (click)="
+            this.dialogsService.unvealNewContainer(
+              this.dialogsService.followerDialogConstants.containerClass,
+              this.dialogsService.followerDialogConstants.newClass
+            )
+          "
+          >{{ this.userFollowers.followers }} followers</span
+        >
+        <span class="user-followers-option"
+          >{{ this.userFollowers.followeds }} followeds</span
+        >
       </div>
     </section>
     <section class="user-posts">
