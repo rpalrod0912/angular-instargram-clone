@@ -11,7 +11,11 @@
     <section class="top-container">
       <div class="user-basic-data">
         <app-user-profile-image
-          [userImage]="this.userData.imageDecoded ?? 'assets/img/user.png'"
+          [userImage]="
+            this.userData.image && this.userData.imageDecoded
+              ? this.userData.imageDecoded
+              : 'assets/img/user.png'
+          "
         ></app-user-profile-image>
         <div class="profile-options">
           <span class="user-name"> {{ this.userData.username }}</span>

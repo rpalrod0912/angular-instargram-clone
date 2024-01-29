@@ -61,4 +61,15 @@ export class UserService implements OnInit {
     );
     return this.httpClient.get<any>(newUrl);
   }
+
+  getUserFollowersDetail(userId: string) {
+    return this.httpClient.get<any>(
+      API_ENDPOINTS.FOLLOWERS.GET_FOLLOWERS_DETAIL,
+      {
+        params: {
+          userId,
+        },
+      }
+    );
+  }
 }

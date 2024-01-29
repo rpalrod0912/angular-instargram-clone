@@ -13,7 +13,6 @@ export class DialogsService {
   isModalOpened = new BehaviorSubject(false);
 
   unvealNewContainer(containerClass: string, newClass: string) {
-    debugger;
     document.querySelector(containerClass)?.classList.add(newClass);
     this.isModalOpened.next(true);
   }

@@ -5,3 +5,5 @@ export const TOKEN_VALIDATION_STATES = {
   EXPIRED: 'expired',
   NOT_FOUND: 'notFound',
 };
+
+export const NO_USER_IMAGE = 'assets/img/user.png';

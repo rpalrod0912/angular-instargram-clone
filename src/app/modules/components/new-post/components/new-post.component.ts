@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { UploadEvent } from 'primeng/fileupload';
+import { NO_USER_IMAGE } from 'src/app/modules/constants/general.constants';
 import {
   createPostSuccessToast,
   successMessageToast,
@@ -28,6 +29,8 @@ import { UserService } from 'src/app/modules/services/user.service';
 export class NewPostComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   @Output() closeCreatePost = new EventEmitter<boolean>();
+
+  noUserImage = NO_USER_IMAGE;
 
   userData!: UserInterface;
   selectedFile!: File;

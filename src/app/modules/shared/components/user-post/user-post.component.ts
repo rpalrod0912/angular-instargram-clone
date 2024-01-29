@@ -7,6 +7,7 @@ import {
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { NO_USER_IMAGE } from 'src/app/modules/constants/general.constants';
 import { PostInterface } from 'src/app/modules/interfaces/post.interface';
 import { GeneralService } from 'src/app/modules/services/general.service';
 import { UserService } from 'src/app/modules/services/user.service';
@@ -38,8 +39,10 @@ export class UserPostComponent implements OnInit {
     this.userService
       .getUserProfileImage(this.postData.user_id.toString())
       .subscribe((result) => {
-        this.postOwnerImage =
-          this.generalService.decodeBase64Image(result.image) ?? null;
+        console.log(result);
+        this.postOwnerImage = result
+          ? this.generalService.decodeBase64Image(result.image)
+          : NO_USER_IMAGE;
       });
   }
 

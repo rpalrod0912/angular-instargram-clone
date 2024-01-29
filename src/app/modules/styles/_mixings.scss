@@ -21,3 +21,11 @@
   right: 2rem;
   top: 2rem;
 }
+
+@mixin popUpHeader {
+  padding: 1.4rem;
+  width: 100%;
+  border-bottom: 1.7px solid #d5cfcf;
+  font-size: 20px;
+  text-align: center;
+}

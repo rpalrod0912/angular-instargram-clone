@@ -15,9 +15,39 @@
 .child-div {
   min-width: 33rem;
   width: 40%;
-  min-height: 33rem;
+  height: 30rem;
   background-color: white;
   border-radius: $standardBorderRadius;
+
+  .child-div-head {
+    @include popUpHeader;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    span {
+      margin: 0.5rem;
+    }
+  }
+
+  .child-div-body {
+    overflow-y: scroll;
+    height: 80%;
+  }
+}
+
+::ng-deep {
+  .follower-data {
+    margin: 1.5rem;
+    font-weight: 500;
+
+    .p-avatar {
+      width: 4rem !important;
+      height: 4rem !important;
+    }
+    .username-span {
+      margin-left: 1rem;
+    }
+  }
 }
 
 .followers-dialog-unvealed {
@@ -26,6 +56,7 @@
 
 .close-button {
   @include closeButton;
+  z-index: 10;
 }
 
 .fullscreen-div {

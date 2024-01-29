@@ -1,4 +1,34 @@
-<div class="fullscreen-div" [@fadeInOut]="openModal">
+<div class="fullscreen-div" [@fadeInOut]="openModal"></div>
+<div class="followers-dialog d-flex">
+  <div class="child-div">
+    <div class="child-div-head">
+      <span>{{ this.userData.username }}</span>
+      <span>Followers</span>
+    </div>
+    <div class="child-div-body flex flex-column">
+      <div
+        class="follower-data flex align-items-center"
+        *ngFor="let followerContent of userFollowersDetail"
+      >
+        <app-user-profile-image
+          *ngIf="
+            followerContent.image !== '' && followerContent.image;
+            else noImage
+          "
+          class="post-user-image"
+          [userImage]="
+            this.generalService.decodeBase64Image(followerContent.image)
+          "
+        ></app-user-profile-image>
+        <ng-template #noImage>
+          <app-user-profile-image
+            class="post-user-image"
+          ></app-user-profile-image>
+        </ng-template>
+        <span class="username-span">{{ followerContent.user_name }}</span>
+      </div>
+    </div>
+  </div>
   <button
     (click)="
       this.dialogsService.closeContainer(
@@ -12,10 +42,4 @@
     icon="pi pi-times"
     class="p-button-rounded p-button-secondary close-button"
   ></button>
-</div>
-<div class="followers-dialog d-flex">
-  <div class="child-div">
-    <div class="child-div-head"></div>
-    <div class="child-div-body"></div>
-  </div>
 </div>

@@ -94,7 +94,6 @@ export class UserProfileComponent {
 
     this.postService.userPostsSubject.subscribe((result) => {
       this.loadedStates.userPostsLoad = false;
-      debugger;
       result.forEach((post: PostInterface, index: number) => {
         post.imageDecoded = this.generalService.decodeBase64Image(post.image);
       });

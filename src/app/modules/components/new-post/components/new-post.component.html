@@ -42,9 +42,9 @@
             <app-user-profile-image
               class="post-user-image"
               [userImage]="
-                this.generalService.decodeBase64Image(
-                  this.userData.image ? this.userData.image : ''
-                )
+                this.userData.image
+                  ? this.generalService.decodeBase64Image(this.userData.image)
+                  : noUserImage
               "
             ></app-user-profile-image>
 

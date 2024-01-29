@@ -37,11 +37,7 @@
   align-items: center;
 
   .span-title {
-    padding: 1.4rem;
-    width: 100%;
-    border-bottom: 1.7px solid $separator;
-    font-size: 20px;
-    text-align: center;
+    @include popUpHeader;
   }
 
   .second-step-buttons {
