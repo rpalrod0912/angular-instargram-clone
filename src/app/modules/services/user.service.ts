@@ -72,4 +72,15 @@ export class UserService implements OnInit {
       }
     );
   }
+
+  getUserFollowedsDetail(userId: string) {
+    return this.httpClient.get<any>(
+      API_ENDPOINTS.FOLLOWERS.GET_FOLLOWEDS_DETAIL,
+      {
+        params: {
+          userId,
+        },
+      }
+    );
+  }
 }

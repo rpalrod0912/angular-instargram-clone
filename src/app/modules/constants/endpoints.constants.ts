@@ -17,7 +17,7 @@ export const API_ENDPOINTS = {
     GET_USER_FOLLOWERS: `${API_URL}/followers`,
     GET_FOLLOWERS_DETAIL: `${API_URL}/followers/followerDetail`,
     // /followers/followedDetail?userId=3
-    GET_FOLLOWEDS_DETAUK: `${API_URL}/followers/followedDetail`,
+    GET_FOLLOWEDS_DETAIL: `${API_URL}/followers/followedDetail`,
   },
   POSTS: {
     GET_USER_POSTS: `${API_URL}/posts/user/:id`,

@@ -1,14 +1,33 @@
-<div class="fullscreen-div" [@fadeInOut]="openModal"></div>
+<div class="fullscreen-div" [@fadeInOut]="openModal.state === true"></div>
 <div class="followers-dialog d-flex">
-  <div class="child-div">
+  <div
+    *ngIf="
+      (openModal.modalName === 'followersDialog' &&
+        userFollowersDetail &&
+        userData) ||
+        (openModal.modalName === 'followedsDialog' &&
+          userFollowedsDetail &&
+          userData);
+      else loading
+    "
+    class="child-div"
+    [@fadeInOut]="openModal"
+  >
     <div class="child-div-head">
       <span>{{ this.userData.username }}</span>
-      <span>Followers</span>
+      <span>{{ this.modalTitle }}</span>
     </div>
-    <div class="child-div-body flex flex-column">
+    <div
+      class="child-div-body flex flex-column"
+      *ngIf="userFollowersDetail.length > 0; else noFollowers"
+    >
       <div
         class="follower-data flex align-items-center"
-        *ngFor="let followerContent of userFollowersDetail"
+        *ngFor="
+          let followerContent of this.openModal.modalName === 'followersDialog'
+            ? this.userFollowersDetail
+            : this.userFollowedsDetail
+        "
       >
         <app-user-profile-image
           *ngIf="
@@ -28,14 +47,25 @@
         <span class="username-span">{{ followerContent.user_name }}</span>
       </div>
     </div>
+    <ng-template #noFollowers>
+      <div
+        class="child-div-body flex flex-column align-items-center justify-content-center"
+      >
+        <i class="pi pi-ban"></i>
+
+        <span class="username-span no-found"
+          >No followers found for this user</span
+        >
+      </div>
+    </ng-template>
   </div>
+  <ng-template #loading>
+    <div class="child-div flex justify-content-center align-items-center">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  </ng-template>
   <button
-    (click)="
-      this.dialogsService.closeContainer(
-        '.followers-dialog',
-        'followers-dialog-unvealed'
-      )
-    "
+    (click)="closeDialog()"
     pButton
     pRipple
     type="button"

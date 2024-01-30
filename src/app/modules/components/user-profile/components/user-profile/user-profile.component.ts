@@ -4,10 +4,12 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnDestroy,
   ViewChild,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { decode } from 'jsonwebtoken';
+import { take } from 'rxjs';
 import { PostInterface } from 'src/app/modules/interfaces/post.interface';
 import {
   UserFollowersInterface,
@@ -24,7 +26,7 @@ import { UserService } from 'src/app/modules/services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnDestroy {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   constructor(
@@ -50,6 +52,31 @@ export class UserProfileComponent {
   userPosts!: PostInterface[];
   image!: any;
 
+  userPostsSubscription = this.postService.userPostsSubject.subscribe(
+    (result) => {
+      this.loadedStates.userPostsLoad = false;
+      result.forEach((post: PostInterface, index: number) => {
+        post.imageDecoded = this.generalService.decodeBase64Image(post.image);
+      });
+      this.userPosts = result;
+      if (this.userPosts) {
+        this.loadedStates.userPostsLoad = true;
+      }
+    }
+  );
+
+  userDataSubscription = this.authService.userDataSubject.subscribe(
+    (result) => {
+      this.loadedStates.userDataLoad = false;
+
+      if (result) {
+        this.userData = result;
+        this.postService.getUserPosts(this.userData.id);
+        this.loadedStates.userDataLoad = true;
+      }
+    }
+  );
+
   ngOnInit() {
     this.setListeners();
   }
@@ -62,45 +89,41 @@ export class UserProfileComponent {
     this.selectedFile = event.target.files[0];
   }
 
+  openFollowerDialog(dialogType: string) {
+    this.dialogsService.unvealNewContainer(
+      this.dialogsService.followerDialogConstants.containerClass,
+      this.dialogsService.followerDialogConstants.newClass,
+      dialogType
+    );
+  }
+
   private setListeners() {
     //Find Last User Data
     this.authService.getUpdatedUserData(
       this.authService.finalUserData.id.toString()
     );
 
-    this.authService.userDataSubject.subscribe((result) => {
-      this.loadedStates.userDataLoad = false;
-
-      if (result) {
-        this.userData = result;
-        this.postService.getUserPosts(this.userData.id);
-        this.loadedStates.userDataLoad = true;
-      }
-    });
-
     //GET USER FOLLOWERS FOR DISPLAYING IN PROFILE
 
-    this.userService.getUserFollowers(this.userData.id).subscribe((result) => {
-      this.loadedStates.userFollowersLoad = false;
+    this.userService
+      .getUserFollowers(this.userData.id)
+      .pipe(take(1))
+      .subscribe((result) => {
+        this.loadedStates.userFollowersLoad = false;
 
-      if (result) {
-        this.userFollowers = result;
-        this.loadedStates.userFollowersLoad = true;
-      }
-      // this.userFollowers=result;
-    });
+        if (result) {
+          this.userFollowers = result;
+          this.loadedStates.userFollowersLoad = true;
+        }
+        // this.userFollowers=result;
+      });
 
     //GET USER POSTS FOR DISPLAYING IN PROFILE
+  }
 
-    this.postService.userPostsSubject.subscribe((result) => {
-      this.loadedStates.userPostsLoad = false;
-      result.forEach((post: PostInterface, index: number) => {
-        post.imageDecoded = this.generalService.decodeBase64Image(post.image);
-      });
-      this.userPosts = result;
-      if (this.userPosts) {
-        this.loadedStates.userPostsLoad = true;
-      }
-    });
+  ngOnDestroy(): void {
+    // Unsubscribe from userPostsSubject
+    this.userDataSubscription.unsubscribe();
+    this.userDataSubscription.unsubscribe();
   }
 }

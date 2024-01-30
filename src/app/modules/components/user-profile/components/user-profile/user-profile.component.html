@@ -29,15 +29,12 @@
         <span>{{ this.userPosts.length }} posts</span>
         <span
           class="user-followers-option"
-          (click)="
-            this.dialogsService.unvealNewContainer(
-              this.dialogsService.followerDialogConstants.containerClass,
-              this.dialogsService.followerDialogConstants.newClass
-            )
-          "
+          (click)="this.openFollowerDialog('followersDialog')"
           >{{ this.userFollowers.followers }} followers</span
         >
-        <span class="user-followers-option"
+        <span
+          class="user-followers-option"
+          (click)="this.openFollowerDialog('followedsDialog')"
           >{{ this.userFollowers.followeds }} followeds</span
         >
       </div>
@@ -52,3 +49,5 @@
     </section>
   </ng-template>
 </section>
+<!-- Dialogs that Pop Up When Clicked -->
+<app-followers-dialog [userData]="this.userData"></app-followers-dialog>

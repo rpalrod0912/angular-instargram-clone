@@ -5,10 +5,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FollowerDetail } from 'src/app/modules/interfaces/followers.interface';
 import { UserInterface } from 'src/app/modules/interfaces/user.interface';
-import { DialogsService } from 'src/app/modules/services/dialogs.service';
+import {
+  DialogsService,
+  OpenedModal,
+} from 'src/app/modules/services/dialogs.service';
 import { GeneralService } from 'src/app/modules/services/general.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
@@ -20,15 +23,18 @@ import { UserService } from 'src/app/modules/services/user.service';
     trigger('fadeInOut', [
       state('true', style({ opacity: 1, display: 'block' })),
       state('false', style({ opacity: 0, display: 'none' })),
-      transition('false <=> true', animate('500ms ease-in-out')),
+      transition('false <=> true', animate('500ms')),
     ]),
   ],
 })
-export class FollowersDialogComponent implements OnInit {
+export class FollowersDialogComponent implements OnInit, OnDestroy {
   @Input() userData!: UserInterface;
-  openModal: boolean = false;
-  userFollowersDetail!: FollowerDetail[];
+  openModal: OpenedModal = { state: false, modalName: 'followersDialog' };
 
+  userFollowersDetail!: FollowerDetail[];
+  userFollowedsDetail!: FollowerDetail[];
+
+  modalTitle!: string;
   constructor(
     readonly dialogsService: DialogsService,
     readonly userService: UserService,
@@ -36,16 +42,45 @@ export class FollowersDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dialogsService.isModalOpened.subscribe((result) => {
-      this.openModal = result;
-      if (this.openModal) {
+    this.dialogsService.isModalOpened.subscribe((result: OpenedModal) => {
+      this.openModal =
+        result.modalName === 'followersDialog' ||
+        result.modalName === 'followedsDialog'
+          ? result
+          : this.openModal;
+      if (this.openModal && this.openModal.modalName === 'followersDialog') {
+        this.modalTitle = 'Followers';
+
         this.userService
           .getUserFollowersDetail(this.userData.id.toString())
           .subscribe((result) => {
             console.log(result);
             this.userFollowersDetail = result;
           });
+      } else if (
+        this.openModal &&
+        this.openModal.modalName === 'followedsDialog'
+      ) {
+        this.modalTitle = 'Followeds';
+        this.userService
+          .getUserFollowedsDetail(this.userData.id.toString())
+          .subscribe((result) => {
+            console.log(result);
+            this.userFollowedsDetail = result;
+          });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dialogsService.isModalOpened.unsubscribe();
+  }
+
+  closeDialog() {
+    this.dialogsService.closeContainer(
+      '.followers-dialog',
+      'followers-dialog-unvealed'
+    );
+    this.openModal = { state: false, modalName: '' };
   }
 }

@@ -31,7 +31,6 @@ import { FollowersDialogComponent } from './dialogs/followers-dialog/followers-d
     ToastMessageComponent,
     OptionsMenuComponent,
     UserPostComponent,
-    FollowersDialogComponent,
     UserProfileImageComponent,
     FollowersDialogComponent,
   ],
