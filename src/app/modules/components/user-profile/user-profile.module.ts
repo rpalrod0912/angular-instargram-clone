@@ -5,10 +5,19 @@ import { MessageService } from 'primeng/api';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserConfigurationComponent } from './components/user-configuration/user-configuration.component';
+import { EditUserImageComponent } from './components/edit-user-image/edit-user-image.component';
 
 @NgModule({
-  declarations: [UserProfileComponent, UserConfigurationComponent],
-  exports: [UserProfileComponent, UserConfigurationComponent],
+  declarations: [
+    UserProfileComponent,
+    UserConfigurationComponent,
+    EditUserImageComponent,
+  ],
+  exports: [
+    UserProfileComponent,
+    UserConfigurationComponent,
+    EditUserImageComponent,
+  ],
   imports: [SharedModule, UserProfileRoutingModule, CommonModule],
   providers: [MessageService],
 })

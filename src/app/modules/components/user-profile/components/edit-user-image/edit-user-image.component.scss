@@ -6,6 +6,7 @@
   width: 100%;
   height: 100%;
   position: fixed;
+
   transition: all 0.7s;
   display: flex;
   justify-content: center;
@@ -13,10 +14,18 @@
   left: 0;
 }
 
+::ng-deep .edit-user-image-modal {
+  .p-progress-spinner {
+    width: 12rem !important;
+    height: 12rem !important;
+  }
+}
+
 .child-div {
   min-width: 33rem;
   width: 40%;
-  height: 30rem;
+  min-height: 30rem;
+
   background-color: white;
   border-radius: $standardBorderRadius;
 
@@ -43,6 +52,23 @@
   }
 }
 
+.form-content {
+  margin: 6rem;
+}
+
+.pi-image {
+  font-size: 8rem;
+  margin-bottom: 3rem;
+}
+
+.image-preview {
+  width: 62%;
+  object-fit: cover;
+  max-height: 20rem;
+  border-right: 1.7px solid #d5cfcf;
+  border-bottom: 1.7px solid #d5cfcf;
+}
+
 ::ng-deep {
   .follower-data {
     margin: 1.5rem;
@@ -63,12 +89,21 @@
   z-index: 10;
 }
 
+.second-step-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 //CODE FOR UNVEALING THE MODAL, WITH DOCUMENT.QUERY SELECTOR DIALOGS SERVICE ADDS -modal-unvealed class to show the container
 
-.followers-modal {
+.edit-user-image-modal {
   @include fullScreenDiv;
-  animation: fadein 0.8s;
+  animation: fadein 0.6s;
 }
-.followers-modal-unvealed {
-  display: block !important;
+
+.edit-user-image-modal-unvealed {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }

@@ -7,8 +7,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { decode } from 'jsonwebtoken';
+
 import { take } from 'rxjs';
 import { PostInterface } from 'src/app/modules/interfaces/post.interface';
 import {
@@ -89,11 +88,15 @@ export class UserProfileComponent implements OnDestroy {
     this.selectedFile = event.target.files[0];
   }
 
-  openFollowerDialog(dialogType: string) {
+  openDialog(
+    containerClass: string,
+    newContainerClass: string,
+    modalName: string
+  ) {
     this.dialogsService.unvealNewContainer(
-      this.dialogsService.followerDialogConstants.containerClass,
-      this.dialogsService.followerDialogConstants.newClass,
-      dialogType
+      containerClass,
+      newContainerClass,
+      modalName
     );
   }
 

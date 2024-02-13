@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   USER: {
     GET_USER_DATA: `${API_URL}/users/:id`,
     GET_USERS: `${API_URL}/users`,
+    UPDATE_IMAGE: `${API_URL}/users/updateImage/:id`,
   },
   UPLOAD_FILE: {
     UPLOAD_USER_IMAGE: `${API_URL}/images/userProfile`,

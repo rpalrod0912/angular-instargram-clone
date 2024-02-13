@@ -11,8 +11,13 @@ export interface OpenedModal {
 })
 export class DialogsService {
   followerDialogConstants = {
-    containerClass: '.followers-dialog',
-    newClass: 'followers-dialog-unvealed',
+    containerClass: '.followers-modal',
+    newClass: 'followers-modal-unvealed',
+  };
+
+  editUserImageConstants = {
+    containerClass: '.edit-user-image-modal',
+    newClass: 'edit-user-image-modal-unvealed',
   };
 
   isModalOpened = new BehaviorSubject({

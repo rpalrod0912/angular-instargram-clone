@@ -11,6 +11,13 @@
     <section class="top-container">
       <div class="user-basic-data">
         <app-user-profile-image
+          (click)="
+            this.openDialog(
+              this.dialogsService.editUserImageConstants.containerClass,
+              this.dialogsService.editUserImageConstants.newClass,
+              'editUserImageDialog'
+            )
+          "
           [userImage]="
             this.userData.image && this.userData.imageDecoded
               ? this.userData.imageDecoded
@@ -29,12 +36,24 @@
         <span>{{ this.userPosts.length }} posts</span>
         <span
           class="user-followers-option"
-          (click)="this.openFollowerDialog('followersDialog')"
+          (click)="
+            this.openDialog(
+              this.dialogsService.followerDialogConstants.containerClass,
+              this.dialogsService.followerDialogConstants.newClass,
+              'followersDialog'
+            )
+          "
           >{{ this.userFollowers.followers }} followers</span
         >
         <span
           class="user-followers-option"
-          (click)="this.openFollowerDialog('followedsDialog')"
+          (click)="
+            this.openDialog(
+              this.dialogsService.followerDialogConstants.containerClass,
+              this.dialogsService.followerDialogConstants.newClass,
+              'followedsDialog'
+            )
+          "
           >{{ this.userFollowers.followeds }} followeds</span
         >
       </div>
@@ -51,3 +70,4 @@
 </section>
 <!-- Dialogs that Pop Up When Clicked -->
 <app-followers-dialog [userData]="this.userData"></app-followers-dialog>
+<app-edit-user-image [userData]="this.userData"></app-edit-user-image>

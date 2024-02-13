@@ -59,6 +59,13 @@
   width: 10rem !important;
   height: 10rem !important;
   border: 0.2px solid black;
+  transition: 0.1s ease-out;
+  cursor: pointer;
+}
+
+::ng-deep .p-avatar:hover {
+  transform: scale(1.08);
+  transition: 0.1s ease-in;
 }
 
 ::ng-deep app-user-post {

@@ -74,3 +74,11 @@ export const createPostSuccessToast = {
   summary: 'Post Created',
   detail: 'Your Post was created successfully',
 };
+
+//Update User Image Succes Toast
+export const updateUserImageSuccessToast = {
+  sticky: true,
+  severity: 'success',
+  summary: 'Profile Image Updated',
+  detail: 'Your Profile Image was Updated successfully',
+};

@@ -5,7 +5,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FollowerDetail } from 'src/app/modules/interfaces/followers.interface';
 import { UserInterface } from 'src/app/modules/interfaces/user.interface';
 import {
@@ -78,8 +84,8 @@ export class FollowersDialogComponent implements OnInit, OnDestroy {
 
   closeDialog() {
     this.dialogsService.closeContainer(
-      '.followers-dialog',
-      'followers-dialog-unvealed'
+      this.dialogsService.followerDialogConstants.containerClass,
+      this.dialogsService.followerDialogConstants.newClass
     );
     this.openModal = { state: false, modalName: '' };
   }

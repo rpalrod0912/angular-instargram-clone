@@ -41,6 +41,14 @@ export class UserService implements OnInit {
     );
   }
 
+  updateUserImage(formData: any, userId: string) {
+    return this.httpClient.put<any>(
+      API_ENDPOINTS.USER.UPDATE_IMAGE.replace(':id', userId),
+      formData,
+      { responseType: 'text' as 'json' }
+    );
+  }
+
   // getUserProfileImage(userId: string) {
   //   const newUrl = API_ENDPOINTS.UPLOAD_FILE.GET_USER_IMAGE.replace(
   //     ':id',

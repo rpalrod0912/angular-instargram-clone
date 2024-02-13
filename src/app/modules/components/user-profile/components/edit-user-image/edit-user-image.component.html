@@ -1,0 +1,85 @@
+<div class="edit-user-image-modal">
+  <p-progressSpinner
+    *ngIf="this.isLoading; else editUserImageTemplate"
+  ></p-progressSpinner>
+  <ng-template #editUserImageTemplate>
+    <div class="followers-dialog d-flex">
+      <div
+        *ngIf="openModal.modalName === 'editUserImageDialog'"
+        class="child-div flex flex-column align-items-center"
+        [@fadeInOut]="openModal"
+      >
+        <div class="child-div-head">
+          <span>{{ this.modalTitle }}</span>
+        </div>
+        <!-- First Modal Step : Image Upload -->
+        <div
+          *ngIf="!modalSteps.firstStep && !modalSteps.secondStep"
+          class="form-content flex flex-column align-items-center justify-content-center"
+        >
+          <i class="pi pi-image"></i>
+          <p-button (click)="openFileInput()" label="Upload From Your Computer">
+            <input
+              class="hidden"
+              type="file"
+              (change)="onFileSelected($event)"
+              name="fileInput"
+              #fileInput
+          /></p-button>
+        </div>
+
+        <!-- Sencond Modal Step : Image Preview -->
+
+        <img
+          *ngIf="modalSteps.firstStep"
+          class="image-preview"
+          [src]="this.selectedFilePreview"
+        />
+        <p-button
+          *ngIf="!this.modalSteps.firstStep"
+          type="submit"
+          (onClick)="this.modalSteps.firstStep = true"
+          class="submit-button flex flex-end m-3"
+          label="Next"
+          [raised]="true"
+          [disabled]="!this.selectedFile"
+          severity="primary"
+        ></p-button>
+
+        <!-- Back Button And Submit Button For Second Step -->
+        <div *ngIf="this.modalSteps.firstStep" class="second-step-buttons">
+          <p-button
+            type="submit"
+            (onClick)="this.modalSteps.firstStep = false"
+            class="submit-button m-3"
+            label="Back"
+            [raised]="true"
+            [disabled]="!this.selectedFile"
+            severity="danger"
+          ></p-button>
+          <p-button
+            type="submit"
+            (onClick)="onSubmit()"
+            class="submit-button m-3"
+            label="Upload"
+            [raised]="true"
+            [disabled]="!this.selectedFile"
+            severity="secondary"
+          ></p-button>
+        </div>
+
+        <button
+          (click)="closeDialog()"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          class="p-button-rounded p-button-secondary close-button"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Message TOAST -->
+<app-toast-message></app-toast-message>
