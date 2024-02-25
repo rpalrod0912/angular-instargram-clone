@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { API_ENDPOINTS } from '../constants/endpoints.constants';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PostInterface } from '../interfaces/post.interface';
 
 @Injectable({
@@ -27,6 +27,16 @@ export class PostService implements OnInit {
     );
     this.httpClient.get<PostInterface[]>(url).subscribe((result) => {
       this.userPostsSubject.next(result);
+    });
+  }
+
+  getHomePosts(page: number): Observable<PostInterface[]> {
+    const url = API_ENDPOINTS.POSTS.GET_ALL_POST;
+    return this.httpClient.get<PostInterface[]>(url, {
+      params: {
+        page,
+        limit: 10,
+      },
     });
   }
 

@@ -23,6 +23,7 @@ import { UserPostComponent } from './components/user-post/user-post.component';
 import { UserProfileImageComponent } from './components/user-profile-image/user-profile-image.component';
 import { StepsModule } from 'primeng/steps';
 import { FollowersDialogComponent } from './dialogs/followers-dialog/followers-dialog.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FollowersDialogComponent } from './dialogs/followers-dialog/followers-d
     UserPostComponent,
     UserProfileImageComponent,
     FollowersDialogComponent,
+    PostComponent,
   ],
   imports: [
     InputTextModule,
@@ -55,6 +57,7 @@ import { FollowersDialogComponent } from './dialogs/followers-dialog/followers-d
     InputTextModule,
     TextInputComponent,
     ProgressSpinnerModule,
+    PostComponent,
     StepsModule,
     PopUpMessageComponent,
     FileUploadModule,

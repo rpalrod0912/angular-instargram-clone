@@ -21,6 +21,7 @@ export const API_ENDPOINTS = {
     GET_FOLLOWEDS_DETAIL: `${API_URL}/followers/followedDetail`,
   },
   POSTS: {
+    GET_ALL_POST: `${API_URL}/posts`,
     GET_USER_POSTS: `${API_URL}/posts/user/:id`,
     UPLOAD_NEW_POST: `${API_URL}/posts`,
   },

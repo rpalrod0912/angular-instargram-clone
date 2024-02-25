@@ -1,1 +1,9 @@
-<p>home works!</p>
+<section class="home-page flex flex-column align-items-center">
+  <p-progressSpinner
+    class="home-page-progress"
+    *ngIf="!posts; else homePostsTemplate"
+  ></p-progressSpinner>
+  <ng-template #homePostsTemplate>
+    <app-post *ngFor="let post of posts" [postData]="post"></app-post>
+  </ng-template>
+</section>

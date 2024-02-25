@@ -26,6 +26,7 @@ export class AuthService implements OnInit {
     private readonly generalService: GeneralService
   ) {
     this.userDataSubject.subscribe((result: UserInterface) => {
+      debugger;
       if (
         this.checkIfTokenIsValid() === TOKEN_VALIDATION_STATES.VALID &&
         result === this.initialUserData

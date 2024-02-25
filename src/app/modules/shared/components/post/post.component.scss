@@ -1,0 +1,103 @@
+@import "/src/app/modules/styles/variables";
+@import "/src/app/modules/styles/mixings";
+
+::ng-deep {
+  .post-container {
+    width: 29rem;
+    min-height: 29rem;
+    // border: 1px solid black;
+    // background-color: red;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 28rem;
+      background: $imageBackground;
+      border-radius: 12px;
+    }
+    .post-user-image {
+      .p-avatar {
+        width: 3rem !important;
+        height: 3rem !important;
+      }
+    }
+    border-bottom: 1.5px solid $separator;
+    margin-bottom: 28px;
+  }
+}
+
+.post-actions {
+  .pi {
+    font-size: 1.5rem;
+  }
+}
+
+.post-info {
+  margin-bottom: 28px;
+}
+
+.post-actions,
+.post-likes,
+.post-info {
+  margin-top: 8px;
+}
+
+.img-container {
+  width: 63%;
+  height: 100%;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  //TODO:Fix this in dialog
+  position: absolute;
+  top: 0rem;
+}
+
+.close-button {
+  @include closeButton;
+}
+
+.username-span {
+  font-weight: 500;
+}
+
+.fullscreen-div {
+  @include fullScreenDiv;
+}
+
+::ng-deep .post-template {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  background-color: white;
+  margin: 0 auto;
+  //Styles for image covering and overflow the container because not all images have correcto proportions
+  .post-principal-image {
+    width: 62%;
+    object-fit: cover;
+    height: 100%;
+    //TODO: Add color to Variable
+    border-right: 1.7px solid $separator;
+  }
+
+  .post-data-container {
+    width: 100%;
+    .post-data-head {
+      display: flex;
+      border-bottom: 1.7px solid $separator;
+    }
+  }
+
+  .post-user-image {
+    margin: 1.5rem;
+
+    .p-avatar {
+      width: 4rem !important;
+      height: 4rem !important;
+    }
+  }
+
+  .comment-text {
+    margin-top: 9px;
+  }
+}

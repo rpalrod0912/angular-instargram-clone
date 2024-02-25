@@ -1,0 +1,79 @@
+<!-- Mnimized Post  -->
+
+<div class="post-container">
+  <section class="post-container-header flex align-items-center">
+    <div class="mt-2 mb-2">
+      <app-user-profile-image
+        class="post-user-image"
+        [userImage]="this.postOwnerImage"
+      ></app-user-profile-image>
+    </div>
+    <span class="username-span">{{ postData.user_name }}</span>
+  </section>
+  <img (click)="showFullscreenDiv()" [src]="postData.imageDecoded" />
+  <section class="post-container-footer">
+    <div class="post-actions mt-1">
+      <i class="pi pi-heart mr-3"></i>
+      <i class="pi pi-comment"></i>
+    </div>
+    <div class="post-likes">
+      <span>0 likes</span>
+    </div>
+    <div class="post-info">
+      <span class="username-span mr-3">{{ postData.user_name }}</span>
+      <span>{{ postData.content }}</span>
+    </div>
+  </section>
+</div>
+
+<!-- Opened Post  -->
+<div class="fullscreen-div" [@fadeInOut]="showDiv">
+  <button
+    (click)="this.showDiv = false"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-times"
+    class="p-button-rounded p-button-secondary close-button"
+  ></button>
+  <p-progressSpinner
+    *ngIf="!this.postOwnerImage; else postContent"
+  ></p-progressSpinner>
+  <ng-template #postContent>
+    <div class="post-template">
+      <img class="post-principal-image" [src]="postData.imageDecoded" />
+      <div class="post-data-container">
+        <div
+          class="post-data-head align-items-center"
+          *ngIf="this.postOwnerImage"
+        >
+          <app-user-profile-image
+            class="post-user-image"
+            [userImage]="this.postOwnerImage"
+          ></app-user-profile-image>
+          <div class="flex flex-column">
+            <span class="username-span">{{ postData.user_name }}</span>
+            <span>{{ postData.content }}</span>
+          </div>
+        </div>
+        <div class="post-data-body flex flex-column">
+          <div
+            class="comment flex align-items-center"
+            *ngFor="let comment of postData.comments"
+          >
+            <app-user-profile-image
+              class="post-user-image"
+              [userImage]="
+                this.generalService.decodeBase64Image(comment.user_image)
+              "
+            ></app-user-profile-image>
+            <div class="flex flex-column">
+              <span class="username-span">{{ comment.user_name }}</span>
+              <span class="comment-text">{{ comment.content }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
