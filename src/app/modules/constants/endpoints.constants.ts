@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api';
+// const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://express-typescript-api.onrender.com/api';
 
 export const API_ENDPOINTS = {
   AUTH: {
