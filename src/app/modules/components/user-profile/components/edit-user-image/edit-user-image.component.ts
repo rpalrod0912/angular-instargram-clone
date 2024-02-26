@@ -38,13 +38,6 @@ import { UserService } from 'src/app/modules/services/user.service';
   selector: 'app-edit-user-image',
   templateUrl: './edit-user-image.component.html',
   styleUrls: ['./edit-user-image.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      state('true', style({ opacity: 1, display: 'block' })),
-      state('false', style({ opacity: 0, display: 'none' })),
-      transition('false <=> true', animate('500ms')),
-    ]),
-  ],
 })
 export class EditUserImageComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;

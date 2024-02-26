@@ -3,17 +3,6 @@
 
 ::ng-deep {
   .post-container {
-    width: 29rem;
-    min-height: 29rem;
-    // border: 1px solid black;
-    // background-color: red;
-    img {
-      object-fit: cover;
-      width: 100%;
-      height: 28rem;
-      background: $imageBackground;
-      border-radius: 12px;
-    }
     .post-user-image {
       .p-avatar {
         width: 3rem !important;
@@ -25,20 +14,53 @@
   }
 }
 
-.post-actions {
-  .pi {
-    font-size: 1.5rem;
+.post-container {
+  width: 29rem;
+  min-height: 29rem;
+  // border: 1px solid black;
+  // background-color: red;
+  .post-actions {
+    .pi {
+      font-size: 1.5rem;
+    }
   }
+
+  .post-info {
+    margin-bottom: 28px;
+  }
+
+  .post-actions,
+  .post-likes,
+  .post-info {
+    margin-top: 8px;
+  }
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 28rem;
+    background: $imageBackground;
+  }
+  .post-container-header,
+  .post-actions,
+  .post-likes,
+  .post-info {
+    transition: 0.13s ease-in;
+  }
+  transition: 0.13s ease-in;
 }
 
-.post-info {
-  margin-bottom: 28px;
-}
-
-.post-actions,
-.post-likes,
-.post-info {
-  margin-top: 8px;
+.post-container:hover {
+  .post-container-header,
+  .post-actions,
+  .post-likes,
+  .post-info {
+    margin: 13px;
+    transition: 0.13s ease-out;
+  }
+  transform: scale(1.1);
+  transition: 0.13s ease-out;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 12px;
 }
 
 .img-container {

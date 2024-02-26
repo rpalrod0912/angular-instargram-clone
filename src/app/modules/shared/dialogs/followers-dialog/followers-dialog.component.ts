@@ -25,13 +25,6 @@ import { UserService } from 'src/app/modules/services/user.service';
   selector: 'app-followers-dialog',
   templateUrl: './followers-dialog.component.html',
   styleUrls: ['./followers-dialog.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      state('true', style({ opacity: 1, display: 'block' })),
-      state('false', style({ opacity: 0, display: 'none' })),
-      transition('false <=> true', animate('500ms')),
-    ]),
-  ],
 })
 export class FollowersDialogComponent implements OnInit, OnDestroy {
   @Input() userData!: UserInterface;

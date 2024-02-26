@@ -72,3 +72,12 @@
     margin-top: 9px;
   }
 }
+//CODE FOR UNVEALING THE MODAL, WITH DOCUMENT.QUERY SELECTOR DIALOGS SERVICE ADDS -modal-unvealed class to show the container
+
+.user-post-modal {
+  @include fullScreenDiv;
+  animation: fadein 0.8s;
+}
+.user-post-modal-unvealed {
+  display: block !important;
+}

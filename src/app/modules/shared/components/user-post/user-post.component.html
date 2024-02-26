@@ -2,9 +2,9 @@
   <img (click)="showFullscreenDiv()" [src]="postData.imageDecoded" />
 </div>
 
-<div class="fullscreen-div" [@fadeInOut]="showDiv">
+<div [class]="'user-post-modal ' + postClass">
   <button
-    (click)="this.showDiv = false"
+    (click)="this.closeDialog()"
     pButton
     pRipple
     type="button"
